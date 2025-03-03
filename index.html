@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פרופ' גיל - מגלים את שוק ההון</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #0ea5e9;
+            --accent-color: #f59e0b;
+            --light-bg: #f8fafc;
+            --dark-text: #0f172a;
+            --light-text: #f8fafc;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--light-text);
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #25D366;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .whatsapp-btn i {
+            margin-left: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-radius: 30px;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            background-color: white;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+        }
+
+        .tab i {
+            margin-left: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .tab.active {
+            background-color: var(--accent-color);
+            color: var(--light-text);
+        }
+
+        .tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-date {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-desc {
+            margin-bottom: 1.5rem;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .card-link i {
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card-link:hover i {
+            transform: translateX(-5px);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-text);
+            color: var(--primary-color);
+            margin: 0 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <img src="/api/placeholder/150/150" alt="פרופ' גיל" class="profile-pic">
+                <h1>פרופ' גיל - מגלים את שוק ההון</h1>
+                <p class="subtitle">מומחה לשוק ההון, כלכלה ופיננסים</p>
+                <a href="#" class="whatsapp-btn" id="whatsapp-group">
+                    <i class="fab fa-whatsapp"></i>
+                    הצטרפו לקבוצת הוואטסאפ
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tab-container">
+            <div class="tab active" data-target="podcasts">
+                <i class="fas fa-podcast"></i>
+                פודקאסטים
+            </div>
+            <div class="tab" data-target="articles">
+                <i class="far fa-newspaper"></i>
+                כתבות בעיתונים
+            </div>
+            <div class="tab" data-target="tv">
+                <i class="fas fa-tv"></i>
+                הופעות בטלוויזיה
+            </div>
+            <div class="tab" data-target="apps">
+                <i class="fas fa-mobile-alt"></i>
+                אפליקציות
+            </div>
+            <div class="tab" data-target="posts">
+                <i class="far fa-comment-dots"></i>
+                פוסטים חשובים
+            </div>
+        </div>
+
+        <section id="podcasts" class="content-section active">
+            <h2>פודקאסטים</h2>
+            <div class="cards-grid" id="podcasts-container">
+                <!-- Cards will be added dynamically via JavaScript -->
+            </div>
+        </section>
+
+        <section id="articles" class="content-section">
+            <h2>כתבות בעיתונים</h2>
+            <div class="cards-grid" id="articles-container">
+                <!-- Cards will be added dynamically via JavaScript -->
+            </div>
+        </section>
+
+        <section id="tv" class="content-section">
+            <h2>הופעות בטלוויזיה</h2>
+            <div class="cards-grid" id="tv-container">
+                <!-- Cards will be added dynamically via JavaScript -->
+            </div>
+        </section>
+
+        <section id="apps" class="content-section">
+            <h2>אפליקציות</h2>
+            <div class="cards-grid" id="apps-container">
+                <!-- Cards will be added dynamically via JavaScript -->
+            </div>
+        </section>
+
+        <section id="posts" class="content-section">
+            <h2>פוסטים חשובים</h2>
+            <div class="cards-grid" id="posts-container">
+                <!-- Cards will be added dynamically via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 פרופ' גיל - כל הזכויות שמורות</p>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Configuration - Edit this to add your content
+        const contentData = {
+            // WhatsApp group link
+            whatsappLink: "https://chat.whatsapp.com/Eiji0CIWupSLZBPjXQf8MI",
+            
+            // Podcasts
+            podcasts: [
+                {
+                    title: "השקעות בשוק המניות בעידן של אי-ודאות",
+                    date: "15 בפברואר, 2025",
+                    description: "בפרק זה אנחנו מדברים על אסטרטגיות השקעה בתקופה של אי-ודאות כלכלית ואיך להתמודד עם תנודתיות בשוק.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                },
+                {
+                    title: "איך לבנות תיק השקעות מאוזן",
+                    date: "1 בפברואר, 2025",
+                    description: "דיון מעמיק על בניית תיק השקעות מאוזן שמתאים לפרופיל הסיכון האישי שלך.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                },
+                {
+                    title: "מגמות בשוק הקריפטו ב-2025",
+                    date: "15 בינואר, 2025",
+                    description: "ניתוח של מגמות עכשוויות בשוק הקריפטו והשלכותיהן על המשקיע הממוצע.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                }
+            ],
+            
+            // Newspaper Articles
+            articles: [
+                {
+                    title: "המאמר השבועי: עתיד ההשקעות הירוקות",
+                    date: "20 בפברואר, 2025",
+                    description: "מאמר דעה על הפוטנציאל והאתגרים בהשקעות ירוקות וכיצד הן משפיעות על השוק הגלובלי.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                },
+                {
+                    title: "ראיון מיוחד: המשבר הכלכלי הבא",
+                    date: "5 בפברואר, 2025",
+                    description: "בראיון מיוחד ל'דה מרקר', פרופ' גיל מנתח את הסימנים למשבר הכלכלי הבא ואיך להיערך אליו.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                }
+            ],
+            
+            // TV Appearances
+            tv: [
+                {
+                    title: "פאנל מומחים: רפורמה במס הכנסה",
+                    date: "25 בפברואר, 2025",
+                    description: "השתתפות בפאנל מומחים בערוץ 12 בנושא השלכות הרפורמה החדשה במס הכנסה על המשק הישראלי.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                },
+                {
+                    title: "ראיון בתכנית הבוקר: יוקר המחיה בישראל",
+                    date: "10 בפברואר, 2025",
+                    description: "ראיון מיוחד על יוקר המחיה בישראל והקשר לשוק ההון המקומי.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                }
+            ],
+            
+            // Applications
+            apps: [
+                {
+                    title: "מחשבון השקעות פרופ' גיל",
+                    date: "1 בינואר, 2025",
+                    description: "אפליקציה חינמית שמסייעת לחשב ולתכנן את תיק ההשקעות שלך על פי מודל הסיכון של פרופ' גיל.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                }
+            ],
+            
+            // Important Posts
+            posts: [
+                {
+                    title: "ניתוח מיוחד: השלכות העלאת הריבית",
+                    date: "28 בפברואר, 2025",
+                    description: "פוסט מיוחד שפורסם בקבוצת הווטסאפ על השלכות העלאת הריבית האחרונה של בנק ישראל על שוק המשכנתאות.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                },
+                {
+                    title: "סקירה שבועית: מניות טכנולוגיה מומלצות",
+                    date: "21 בפברואר, 2025",
+                    description: "סקירה מקיפה של מניות טכנולוגיה מומלצות לשבוע הקרוב והסיבות לבחירות אלו.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                },
+                {
+                    title: "מדריך: איך לקרוא דוחות כספיים",
+                    date: "14 בפברואר, 2025",
+                    description: "מדריך מעשי לקריאה והבנה של דוחות כספיים של חברות ציבוריות.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                }
+            ]
+        };
+
+        // Set WhatsApp group link
+        document.getElementById('whatsapp-group').href = contentData.whatsappLink;
+
+        // Function to create a card element
+        function createCard(item) {
+            return `
+                <div class="card">
+                    <img src="${item.image}" alt="${item.title}" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">${item.title}</h3>
+                        <p class="card-date">${item.date}</p>
+                        <p class="card-desc">${item.description}</p>
+                        <a href="${item.link}" class="card-link">
+                            <i class="fas fa-arrow-left"></i>
+                            קרא עוד
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to populate a container with cards
+        function populateContainer(containerId, items) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = items.map(item => createCard(item)).join('');
+        }
+
+        // Populate all containers
+        populateContainer('podcasts-container', contentData.podcasts);
+        populateContainer('articles-container', contentData.articles);
+        populateContainer('tv-container', contentData.tv);
+        populateContainer('apps-container', contentData.apps);
+        populateContainer('posts-container', contentData.posts);
+
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.tab');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and content sections
+                tabs.forEach(t => t.classList.remove('active'));
+                contentSections.forEach(cs => cs.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content section
+                const targetId = tab.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // Function to add a new item (for future use)
+        function addNewItem(category, newItem) {
+            // Add item to the data
+            contentData[category].push(newItem);
+            
+            // Re-populate the container
+            populateContainer(`${category}-container`, contentData[category]);
+        }
+
+        // Example of how to add a new item (for demonstration)
+        /*
+        const newPodcast = {
+            title: "פודקאסט חדש על NFTs",
+            date: "1 במרץ, 2025",
+            description: "דיון על עולם ה-NFT והפוטנציאל העסקי בתחום.",
+            image: "/api/placeholder/300/180",
+            link: "#"
+        };
+        
+        // Call this function to add a new podcast
+        // addNewItem('podcasts', newPodcast);
+        */
+    </script>
+</body>
+</html>
