@@ -495,7 +495,7 @@
                 },
                 {
                    
-    title: "השפעת הבינה המלאכותית על שוק ההון:",
+    title: "השפעת הבינה המלאכותית על שוק ההון",
     date: "2.2.2025",
     description: "אצל ספקט ורבינוביץ",
     image: "/api/placeholder/300/180",
@@ -582,21 +582,21 @@
 
         // Function to create a card element
         function createCard(item) {
-            return `
-                <div class="card">
-                    <img src="${item.image}" alt="${item.title}" class="card-img">
-                    <div class="card-content">
-                        <h3 class="card-title">${item.title}</h3>
-                        <p class="card-date">${item.date}</p>
-                        <p class="card-desc">${item.description}</p>
-                        <a href="${item.link}" class="card-link">
-                            <i class="fas fa-arrow-left"></i>
-                            קרא עוד
-                        </a>
-                    </div>
-                </div>
-            `;
-        }
+    return `
+        <div class="card">
+            <img src="${item.image}" alt="${item.title}" class="card-img">
+            <div class="card-content">
+                <h3 class="card-title">${item.title}</h3>
+                <p class="card-date">${item.date}</p>
+                <p class="card-desc">${item.description}</p>
+                <a href="${item.link}" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-arrow-left"></i>
+                    קרא עוד
+                </a>
+            </div>
+        </div>
+    `;
+}
 
         // Function to populate a container with cards
         function populateContainer(containerId, items) {
