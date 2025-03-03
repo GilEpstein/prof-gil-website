@@ -56,7 +56,7 @@
             border: 4px solid var(--light-text);
             margin-bottom: 1rem;
             object-fit: cover;
-object-position: top;
+            object-position: top;
         }
 
         h1 {
@@ -240,14 +240,70 @@ object-position: top;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
+        /* סגנון לחלון הסיסמה */
+        #password-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .password-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .password-container h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .password-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .password-container button {
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .password-container button.cancel {
+            background-color: #6b7280;
+            margin-right: 10px;
+        }
+
+        .password-container .error-message {
+            color: #dc2626;
+            margin-top: 10px;
+            display: none;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
             }
             
             .profile-pic {
-                width: 120px;
-                height: 120px;
+                width: 170px;
+                height: 170px;
             }
             
             .cards-grid {
@@ -276,7 +332,7 @@ object-position: top;
             <div class="tab active" data-target="podcasts">
                 <i class="fas fa-podcast"></i>
                 פודקאסטים
-                            </div>
+            </div>
             <div class="tab" data-target="articles">
                 <i class="far fa-newspaper"></i>
                 כתבות בעיתונים
@@ -344,6 +400,19 @@ object-position: top;
         </div>
     </footer>
 
+    <!-- חלון סיסמה -->
+    <div id="password-modal">
+        <div class="password-container">
+            <h3>הזן סיסמה לגישה לפאנל הניהול</h3>
+            <input type="password" id="admin-password" placeholder="הזן סיסמה">
+            <div class="error-message" id="password-error">סיסמה שגויה. נסה שוב.</div>
+            <div>
+                <button class="cancel" id="cancel-password">ביטול</button>
+                <button id="submit-password">אישור</button>
+            </div>
+        </div>
+    </div>
+
     <!-- פאנל מנהל (מוסתר כברירת מחדל) -->
     <div id="admin-panel" style="display: none; position: fixed; bottom: 20px; left: 20px; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.1); z-index: 1000; max-width: 90%; max-height: 80%; overflow-y: auto;">
         <h3>פאנל ניהול תוכן</h3>
@@ -385,18 +454,22 @@ object-position: top;
         <div id="result-message" style="margin-top: 10px; padding: 8px; display: none;"></div>
         
         <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;">
-            <p style="font-size: 12px; color: #666;">הערה: תוכן שתוסיף כאן יישמר רק עד רענון הדף. כדי לשמור באופן קבוע, עליך לעדכן את הקוד ב-GitHub.</p>
+            <p style="font-size: 14px; color: #b91c1c; font-weight: bold;">⚠️ שים לב: תוכן שתוסיף כאן יעלם אם תרענן את הדף!</p>
             
-            <details style="margin-top: 10px;">
-                <summary style="cursor: pointer; color: var(--primary-color);">הוראות לשמירה קבועה</summary>
-                <div style="padding: 10px; font-size: 14px;">
-                    <p>1. הוסף את התוכן באמצעות הטופס</p>
-                    <p>2. בחלון שיופיע, העתק את הקוד שנוצר</p>
-                    <p>3. פתח את קובץ ה-index.html בגיטהאב</p>
-                    <p>4. מצא את הקטע המתאים (למשל podcasts:) והוסף את הקוד שהעתקת</p>
-                    <p>5. שמור את השינויים בגיטהאב</p>
-                </div>
-            </details>
+            <div style="margin-top: 10px; background-color: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                <h4 style="color: var(--primary-color); margin-bottom: 10px;">הוראות לשמירה קבועה:</h4>
+                <ol style="padding-right: 20px;">
+                    <li>הוסף את התוכן באמצעות הטופס הזה</li>
+                    <li>בחלון שיופיע, <strong>העתק את הקוד המוצג</strong></li>
+                    <li>פתח את קובץ ה-index.html ב-GitHub:<br>
+                        <span style="font-size: 13px; color: #64748b; padding-right: 20px;">לחץ על הקובץ index.html במאגר שלך ב-GitHub</span></li>
+                    <li>לחץ על כפתור העריכה (סמל עיפרון)</li>
+                    <li>חפש את המקום המתאים בקוד:<br>
+                        <span style="font-size: 13px; color: #64748b; padding-right: 20px;">למשל, עבור פודקאסט חפש: <code>podcasts: [</code></span></li>
+                    <li><strong>הדבק את הקוד בדיוק אחרי הסוגר המרובע [</strong></li>
+                    <li>לחץ על "Commit changes" בתחתית העמוד</li>
+                </ol>
+            </div>
         </div>
     </div>
     
@@ -413,13 +486,20 @@ object-position: top;
             
             // Podcasts
             podcasts: [
-               {
-    title: "שבע עובדות שלא ידעתם על הכלכלה הישראלית",
-    date: "4.2.2025",
-    description: "אצל ספקט ורביבוצקי",
-    image: "/api/placeholder/300/180",
-    link: "https://open.spotify.com/episode/5W28OWhcZ70V7cJkW9fC3i?si=83719dcb8d604499"
-},,
+                {
+                    title: "שבע עובדות שלא ידעתם על הכלכלה הישראלית",
+                    date: "4.2.2025",
+                    description: "אצל ספקט ורביבוצקי",
+                    image: "/api/placeholder/300/180",
+                    link: "https://open.spotify.com/episode/5W28OWhcZ70V7cJkW9fC3i?si=83719dcb8d604499"
+                },
+                {
+                    title: "השקעות בשוק המניות בעידן של אי-ודאות",
+                    date: "15 בפברואר, 2025",
+                    description: "בפרק זה אנחנו מדברים על אסטרטגיות השקעה בתקופה של אי-ודאות כלכלית ואיך להתמודד עם תנודתיות בשוק.",
+                    image: "/api/placeholder/300/180",
+                    link: "#"
+                },
                 {
                     title: "איך לבנות תיק השקעות מאוזן",
                     date: "1 בפברואר, 2025",
@@ -562,19 +642,52 @@ object-position: top;
             });
         });
 
-        // קוד לניהול פאנל המנהל
+        // קוד לסיסמה ולפאנל המנהל
         const openAdminBtn = document.getElementById('open-admin');
         const closeAdminBtn = document.getElementById('close-admin');
         const adminPanel = document.getElementById('admin-panel');
         const addContentBtn = document.getElementById('add-content-btn');
         const resultMessage = document.getElementById('result-message');
+        const passwordModal = document.getElementById('password-modal');
+        const adminPassword = document.getElementById('admin-password');
+        const submitPasswordBtn = document.getElementById('submit-password');
+        const cancelPasswordBtn = document.getElementById('cancel-password');
+        const passwordError = document.getElementById('password-error');
         
-        // פתיחה וסגירה של הפאנל
+        // פתיחת חלון הסיסמה
         openAdminBtn.addEventListener('click', () => {
-            adminPanel.style.display = 'block';
-            openAdminBtn.style.display = 'none';
+            passwordModal.style.display = 'flex';
+            adminPassword.value = '';
+            passwordError.style.display = 'none';
         });
         
+        // ביטול הזנת סיסמה
+        cancelPasswordBtn.addEventListener('click', () => {
+            passwordModal.style.display = 'none';
+        });
+        
+        // בדיקת סיסמה
+        submitPasswordBtn.addEventListener('click', checkPassword);
+        adminPassword.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        function checkPassword() {
+            const password = adminPassword.value;
+            if (password === 'ayeley12') {
+                passwordModal.style.display = 'none';
+                adminPanel.style.display = 'block';
+                openAdminBtn.style.display = 'none';
+                passwordError.style.display = 'none';
+            } else {
+                passwordError.style.display = 'block';
+                adminPassword.focus();
+            }
+        }
+        
+        // סגירת פאנל המנהל
         closeAdminBtn.addEventListener('click', () => {
             adminPanel.style.display = 'none';
             openAdminBtn.style.display = 'flex';
@@ -617,7 +730,19 @@ object-position: top;
     link: "${link || '#'}"
 },`;
             
-            showResult(`התוכן נוסף בהצלחה! כדי לשמור אותו באופן קבוע, העתק את הקוד הבא והוסף אותו למערך ${contentType}:<br><br><code>${codeToSave}</code>`, 'success');
+            showResult(`
+<strong>התוכן נוסף בהצלחה!</strong><br><br>
+<strong>כדי שהתוכן יישמר באופן קבוע, בצע את הפעולות הבאות:</strong><br>
+1. העתק את הקוד הבא (Ctrl+C):<br>
+<textarea style="width:100%; padding:5px; margin:10px 0; direction:ltr; text-align:left; font-family:monospace;">${codeToSave}</textarea>
+2. גש למאגר שלך ב-GitHub<br>
+3. פתח את קובץ index.html<br>
+4. לחץ על כפתור העריכה (סמל עיפרון)<br>
+5. חפש את המקום המתאים בקוד (${contentType}:&nbsp;[)<br>
+6. הדבק את הקוד בדיוק אחרי הסוגר המרובע הפותח [<br>
+7. לחץ על Commit changes בתחתית העמוד<br><br>
+<span style="color:#166534; font-weight:bold;">⚠️ שים לב: ללא ביצוע הפעולות הללו, התוכן יעלם ברענון הדף!</span>
+`, 'success');
             
             // ניקוי הטופס
             document.getElementById('title-input').value = '';
