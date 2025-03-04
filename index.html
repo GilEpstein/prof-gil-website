@@ -14,6 +14,43 @@
             --dark-text: #0f172a;
             --light-text: #f8fafc;
             --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            
+            /* תוספת: משתנים למצב לילה */
+            --dark-bg: #0f172a;
+            --dark-secondary-bg: #1e293b;
+            --dark-secondary-text: #94a3b8;
+        }
+
+        /* מצב לילה */
+        .dark-mode {
+            --light-bg: var(--dark-bg);
+            --dark-text: var(--light-text);
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+        }
+
+        .dark-mode .card {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+
+        .dark-mode .card-date {
+            color: var(--dark-secondary-text);
+        }
+
+        .dark-mode .tab {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+
+        .dark-mode .card-link {
+            color: var(--secondary-color);
+        }
+
+        .dark-mode .social-link {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
         }
 
         * {
@@ -27,6 +64,7 @@
             background-color: var(--light-bg);
             color: var(--dark-text);
             line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         header {
@@ -94,6 +132,109 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
+        /* חיפוש */
+        .search-container {
+            margin: 1.5rem auto;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            padding-right: 45px;
+            border: none;
+            border-radius: 30px;
+            box-shadow: var(--card-shadow);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            background-color: white;
+            color: var(--dark-text);
+        }
+
+        .dark-mode .search-input {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        .search-results {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin-top: 10px;
+            z-index: 100;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .dark-mode .search-results {
+            background-color: var(--dark-secondary-bg);
+        }
+
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .dark-mode .search-result-item:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .search-result-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .search-result-category {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+
+        .dark-mode .search-result-category {
+            color: var(--dark-secondary-text);
+        }
+
+        .no-results {
+            padding: 15px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .dark-mode .no-results {
+            color: var(--dark-secondary-text);
+        }
+
         .tab-container {
             display: flex;
             justify-content: center;
@@ -144,6 +285,18 @@
             to { opacity: 1; }
         }
 
+        /* אנימציות להופעת קלפים */
+        .animate-cards .card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .animate-cards .card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -156,7 +309,8 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
+            position: relative;
         }
 
         .card:hover {
@@ -206,6 +360,80 @@
 
         .card-link:hover i {
             transform: translateX(-5px);
+        }
+
+        /* תוספת: כפתורי שיתוף */
+        .share-buttons {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 5px 10px;
+            display: flex;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .dark-mode .share-buttons {
+            background-color: rgba(30, 41, 59, 0.8);
+        }
+
+        .card:hover .share-buttons {
+            opacity: 1;
+        }
+
+        .share-button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 3px;
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+        }
+
+        .dark-mode .share-button {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .share-button.facebook {
+            color: #1877f2;
+        }
+
+        .share-button.twitter {
+            color: #1da1f2;
+        }
+
+        .share-button.whatsapp {
+            color: #25d366;
+        }
+
+        .share-button.copy {
+            color: #6b7280;
+        }
+
+        .dark-mode .share-button.facebook, 
+        .dark-mode .share-button.twitter, 
+        .dark-mode .share-button.whatsapp {
+            color: var(--light-text);
+        }
+
+        .dark-mode .share-button.copy {
+            color: var(--dark-secondary-text);
         }
 
         footer {
@@ -264,9 +492,17 @@
             width: 90%;
         }
 
+        .dark-mode .password-container {
+            background-color: var(--dark-secondary-bg);
+        }
+
         .password-container h3 {
             margin-bottom: 15px;
             color: var(--primary-color);
+        }
+
+        .dark-mode .password-container h3 {
+            color: var(--light-text);
         }
 
         .password-container input {
@@ -275,6 +511,12 @@
             margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 4px;
+        }
+
+        .dark-mode .password-container input {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            border-color: #4b5563;
         }
 
         .password-container button {
@@ -295,6 +537,127 @@
             color: #dc2626;
             margin-top: 10px;
             display: none;
+        }
+
+        /* תוספת: כפתור חזרה למעלה */
+        .back-to-top {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        /* תוספת: סטטיסטיקות */
+        .stats-container {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 3rem 0;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+        }
+
+        /* תוספת: תאריך עדכון אחרון */
+        .last-update {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-top: 1rem;
+        }
+
+        .dark-mode .last-update {
+            color: var(--dark-secondary-text);
+        }
+
+        /* תוספת: מתג מצב לילה */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: white;
+            border-radius: 20px;
+            padding: 5px;
+            display: flex;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 999;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode .theme-toggle {
+            background-color: var(--dark-secondary-bg);
+        }
+
+        .theme-toggle-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle-icon.sun {
+            color: #f59e0b;
+        }
+
+        .theme-toggle-icon.moon {
+            color: #6b7280;
+        }
+
+        .dark-mode .theme-toggle-icon.sun {
+            color: #6b7280;
+        }
+
+        .dark-mode .theme-toggle-icon.moon {
+            color: #f8fafc;
         }
 
         /* Admin Controls */
@@ -340,6 +703,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
+        /* Responsive design improvements */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -353,10 +717,80 @@
             .cards-grid {
                 grid-template-columns: 1fr;
             }
+
+            .tab-container {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                margin-bottom: 0;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+            }
+
+            .tab-container::-webkit-scrollbar {
+                display: none; /* Chrome, Safari and Opera */
+            }
+
+            .tab {
+                flex-shrink: 0;
+                padding: 0.8rem 1.2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .stat-label {
+                font-size: 1rem;
+            }
+
+            .search-container {
+                margin: 1rem auto;
+            }
+
+            .search-input {
+                padding: 10px 45px 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                left: 10px;
+            }
+
+            .back-to-top {
+                bottom: 80px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+            }
         }
     </style>
 </head>
-<body>
+<body class="animate-cards">
+    <!-- מתג מצב לילה -->
+    <div class="theme-toggle" id="theme-toggle">
+        <div class="theme-toggle-icon sun"><i class="fas fa-sun"></i></div>
+        <div class="theme-toggle-icon moon"><i class="fas fa-moon"></i></div>
+    </div>
+
+    <!-- כפתור חזרה למעלה -->
+    <div class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <header>
         <div class="container">
             <div class="header-content">
@@ -364,7 +798,7 @@
                 <h1>@פרופ' גיל - מגלים את שוק ההון</h1>
                 <p class="subtitle">מומחה לשוק ההון, כלכלה ופיננסים</p>
                 <a href="#" class="whatsapp-btn" id="whatsapp-group" target="_blank" rel="noopener noreferrer">
-    <i class="fab fa-whatsapp"></i>
+                    <i class="fab fa-whatsapp"></i>
                     הצטרפו לקבוצת הוואטסאפ
                 </a>
             </div>
@@ -372,6 +806,20 @@
     </header>
 
     <main class="container">
+        <!-- חיפוש -->
+        <div class="search-container">
+            <input type="text" class="search-input" id="search-input" placeholder="חיפוש תוכן...">
+            <div class="search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="search-results" id="search-results"></div>
+        </div>
+
+        <!-- תאריך עדכון אחרון -->
+        <div class="last-update" id="last-update">
+            עודכן לאחרונה: <span id="update-date">4 במרץ, 2025</span>
+        </div>
+
         <div class="tab-container">
             <div class="tab active" data-target="podcasts">
                 <i class="fas fa-podcast"></i>
@@ -392,6 +840,28 @@
             <div class="tab" data-target="posts">
                 <i class="far fa-comment-dots"></i>
                 פוסטים חשובים
+            </div>
+        </div>
+
+        <!-- סטטיסטיקות -->
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="podcast-count">25+</div>
+                    <div class="stat-label">פודקאסטים</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="article-count">42</div>
+                    <div class="stat-label">כתבות בעיתונים</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="tv-count">18</div>
+                    <div class="stat-label">הופעות בטלוויזיה</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="members-count">5,200+</div>
+                    <div class="stat-label">חברים בקהילה</div>
+                </div>
             </div>
         </div>
 
@@ -522,7 +992,7 @@
         </button>
         <div class="visitor-counter" id="visitor-counter">
             <i class="fas fa-user-friends"></i>
-            <span id="counter-value">0</span>&nbsp מבקרים
+            <span id="counter-value">0</span>&nbsp;מבקרים
         </div>
     </div>
 
@@ -623,14 +1093,99 @@
             ]
         };
 
+        // עדכון תאריך עדכון אחרון - מעדכן אוטומטית לתאריך היום
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = today.toLocaleDateString('he-IL', options);
+            document.getElementById('update-date').textContent = formattedDate;
+        });
+
         // Set WhatsApp group link
         document.getElementById('whatsapp-group').href = contentData.whatsappLink;
 
-        // Function to create a card element
-        function createCard(item) {
+        // מצב לילה (Dark Mode)
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // בדיקה אם יש העדפה שמורה במערכת
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }
+
+        themeToggle.addEventListener('click', function() {
+            body.classList.toggle('dark-mode');
+            
+            // שמירת ההעדפה
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // כפתור חזרה למעלה
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // אנימציית הופעת הקלפים
+        function checkCardVisibility() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const cardBottom = card.getBoundingClientRect().bottom;
+                
+                // אם הקלף נראה בחלון
+                if (cardTop < window.innerHeight && cardBottom > 0) {
+                    card.classList.add('show');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkCardVisibility);
+        window.addEventListener('resize', checkCardVisibility);
+        
+        // הפעלה ראשונית של בדיקת נראות הקלפים
+        setTimeout(checkCardVisibility, 100);
+
+        // Function to create a card element with share buttons
+        function createCard(item, type) {
+            // Create unique ID for the card based on title
+            const cardId = `card-${type}-${item.title.replace(/\s+/g, '-').toLowerCase()}`;
+            
             return `
-                <div class="card">
+                <div class="card" id="${cardId}">
                     <img src="${item.image}" alt="${item.title}" class="card-img">
+                    <div class="share-buttons">
+                        <button class="share-button facebook" onclick="shareOnFacebook('${cardId}', '${item.link}')">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="share-button twitter" onclick="shareOnTwitter('${cardId}', '${item.link}')">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button class="share-button whatsapp" onclick="shareOnWhatsApp('${cardId}', '${item.link}')">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                        <button class="share-button copy" onclick="copyLink('${cardId}', '${item.link}')">
+                            <i class="fas fa-link"></i>
+                        </button>
+                    </div>
                     <div class="card-content">
                         <h3 class="card-title">${item.title}</h3>
                         <p class="card-date">${item.date}</p>
@@ -643,19 +1198,210 @@
                 </div>
             `;
         }
+        // פונקציות שיתוף
+        function shareOnFacebook(cardId, link) {
+            const card = document.getElementById(cardId);
+            const title = card.querySelector('.card-title').textContent;
+            const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}&quote=${encodeURIComponent(title)}`;
+            window.open(shareUrl, '_blank');
+        }
+        
+        function shareOnTwitter(cardId, link) {
+            const card = document.getElementById(cardId);
+            const title = card.querySelector('.card-title').textContent;
+            const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(link)}`;
+            window.open(shareUrl, '_blank');
+        }
+        
+        function shareOnWhatsApp(cardId, link) {
+            const card = document.getElementById(cardId);
+            const title = card.querySelector('.card-title').textContent;
+            const shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${title} - ${link}`)}`;
+            window.open(shareUrl, '_blank');
+        }
+        
+        function copyLink(cardId, link) {
+            navigator.clipboard.writeText(link).then(() => {
+                // הודעה זמנית על העתקה מוצלחת
+                const card = document.getElementById(cardId);
+                const copyButton = card.querySelector('.share-button.copy');
+                const originalIcon = copyButton.innerHTML;
+                
+                copyButton.innerHTML = '<i class="fas fa-check"></i>';
+                
+                setTimeout(() => {
+                    copyButton.innerHTML = originalIcon;
+                }, 2000);
+            });
+        }
+
+        // פונקציית חיפוש
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim().toLowerCase();
+            
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+            
+            // איסוף כל התוצאות
+            let results = [];
+            
+            // חיפוש בפודקאסטים
+            contentData.podcasts.forEach(item => {
+                if (item.title.toLowerCase().includes(query) || 
+                    item.description.toLowerCase().includes(query)) {
+                    results.push({
+                        type: 'podcasts',
+                        title: item.title,
+                        date: item.date,
+                        description: item.description,
+                        link: item.link
+                    });
+                }
+            });
+            
+            // חיפוש בכתבות
+            contentData.articles.forEach(item => {
+                if (item.title.toLowerCase().includes(query) || 
+                    item.description.toLowerCase().includes(query)) {
+                    results.push({
+                        type: 'articles',
+                        title: item.title,
+                        date: item.date,
+                        description: item.description,
+                        link: item.link
+                    });
+                }
+            });
+            
+            // חיפוש בהופעות טלוויזיה
+            contentData.tv.forEach(item => {
+                if (item.title.toLowerCase().includes(query) || 
+                    item.description.toLowerCase().includes(query)) {
+                    results.push({
+                        type: 'tv',
+                        title: item.title,
+                        date: item.date,
+                        description: item.description,
+                        link: item.link
+                    });
+                }
+            });
+            
+            // חיפוש באפליקציות
+            contentData.apps.forEach(item => {
+                if (item.title.toLowerCase().includes(query) || 
+                    item.description.toLowerCase().includes(query)) {
+                    results.push({
+                        type: 'apps',
+                        title: item.title,
+                        date: item.date,
+                        description: item.description,
+                        link: item.link
+                    });
+                }
+            });
+            
+            // חיפוש בפוסטים
+            contentData.posts.forEach(item => {
+                if (item.title.toLowerCase().includes(query) || 
+                    item.description.toLowerCase().includes(query)) {
+                    results.push({
+                        type: 'posts',
+                        title: item.title,
+                        date: item.date,
+                        description: item.description,
+                        link: item.link
+                    });
+                }
+            });
+            
+            // הצגת התוצאות
+            if (results.length > 0) {
+                let html = '';
+                
+                results.forEach(result => {
+                    const typeNames = {
+                        podcasts: 'פודקאסט',
+                        articles: 'כתבה',
+                        tv: 'הופעה בטלוויזיה',
+                        apps: 'אפליקציה',
+                        posts: 'פוסט'
+                    };
+                    
+                    html += `
+                        <div class="search-result-item" data-link="${result.link}" data-type="${result.type}">
+                            <div class="search-result-title">${result.title}</div>
+                            <div class="search-result-category">${typeNames[result.type]} | ${result.date}</div>
+                            <div class="search-result-desc">${result.description.substring(0, 100)}${result.description.length > 100 ? '...' : ''}</div>
+                        </div>
+                    `;
+                });
+                
+                searchResults.innerHTML = html;
+                searchResults.style.display = 'block';
+                
+                // הוספת מאזינים לאירועי לחיצה
+                const resultItems = document.querySelectorAll('.search-result-item');
+                resultItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        const link = this.getAttribute('data-link');
+                        const type = this.getAttribute('data-type');
+                        
+                        // אם יש לינק, עבור אליו
+                        if (link && link !== '#') {
+                            window.open(link, '_blank');
+                        }
+                        
+                        // סמן את הטאב המתאים ועבור לקטגוריה
+                        const tabs = document.querySelectorAll('.tab');
+                        tabs.forEach(tab => {
+                            if (tab.getAttribute('data-target') === type) {
+                                tab.click();
+                                
+                                // סגירת תוצאות החיפוש
+                                searchResults.style.display = 'none';
+                                searchInput.value = '';
+                            }
+                        });
+                    });
+                });
+                
+            } else {
+                searchResults.innerHTML = '<div class="no-results">לא נמצאו תוצאות</div>';
+                searchResults.style.display = 'block';
+            }
+        });
+        
+        // סגירת תוצאות החיפוש בלחיצה מחוץ לתיבת החיפוש
+        document.addEventListener('click', function(event) {
+            if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
 
         // Function to populate a container with cards
-        function populateContainer(containerId, items) {
+        function populateContainer(containerId, items, type) {
             const container = document.getElementById(containerId);
-            container.innerHTML = items.map(item => createCard(item)).join('');
+            container.innerHTML = items.map(item => createCard(item, type)).join('');
         }
 
         // Populate all containers
-        populateContainer('podcasts-container', contentData.podcasts);
-        populateContainer('articles-container', contentData.articles);
-        populateContainer('tv-container', contentData.tv);
-        populateContainer('apps-container', contentData.apps);
-        populateContainer('posts-container', contentData.posts);
+        populateContainer('podcasts-container', contentData.podcasts, 'podcasts');
+        populateContainer('articles-container', contentData.articles, 'articles');
+        populateContainer('tv-container', contentData.tv, 'tv');
+        populateContainer('apps-container', contentData.apps, 'apps');
+        populateContainer('posts-container', contentData.posts, 'posts');
+
+        // עדכון הספירות בסטטיסטיקות
+        document.getElementById('podcast-count').textContent = contentData.podcasts.length + '+';
+        document.getElementById('article-count').textContent = contentData.articles.length;
+        document.getElementById('tv-count').textContent = contentData.tv.length;
+        // Note: members-count is a static number for now
 
         // Tab switching functionality
         const tabs = document.querySelectorAll('.tab');
@@ -673,6 +1419,9 @@
                 // Show corresponding content section
                 const targetId = tab.getAttribute('data-target');
                 document.getElementById(targetId).classList.add('active');
+
+                // בדיקה מחדש של נראות הקלפים לאחר החלפת הטאב
+                setTimeout(checkCardVisibility, 100);
             });
         });
 
@@ -726,8 +1475,7 @@
             adminPanel.style.display = 'none';
             document.querySelector('.admin-controls').style.display = 'flex';
         });
-        
-        // פונקציה להוספת תוכן חדש
+// פונקציה להוספת תוכן חדש
         addContentBtn.addEventListener('click', () => {
             const contentType = document.getElementById('content-type').value;
             const title = document.getElementById('title-input').value.trim();
@@ -753,7 +1501,19 @@
             contentData[contentType].unshift(newItem); // הוספה בתחילת המערך
             
             // עדכון התצוגה
-            populateContainer(`${contentType}-container`, contentData[contentType]);
+            populateContainer(`${contentType}-container`, contentData[contentType], contentType);
+            
+            // עדכון הספירות בסטטיסטיקות
+            if (contentType === 'podcasts') {
+                document.getElementById('podcast-count').textContent = contentData.podcasts.length + '+';
+            } else if (contentType === 'articles') {
+                document.getElementById('article-count').textContent = contentData.articles.length;
+            } else if (contentType === 'tv') {
+                document.getElementById('tv-count').textContent = contentData.tv.length;
+            }
+            
+            // בדיקה מחדש של נראות הקלפים לאחר הוספת תוכן חדש
+            setTimeout(checkCardVisibility, 100);
             
             // הצגת קוד לשמירה
             const codeToSave = `{
