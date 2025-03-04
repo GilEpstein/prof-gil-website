@@ -361,7 +361,6 @@
         .card-link:hover i {
             transform: translateX(-5px);
         }
-
         /* תוספת: כפתורי שיתוף */
         .share-buttons {
             position: absolute;
@@ -441,7 +440,7 @@
             color: var(--light-text);
             text-align: center;
             padding: 2rem 0;
-            margin-top: 3rem;
+            margin-top: 1rem;
         }
 
         .social-links {
@@ -570,20 +569,21 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
-        /* תוספת: סטטיסטיקות */
+        /* עדכון: סטטיסטיקות קטנות יותר בתחתית הדף */
         .stats-container {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 3rem 0;
-            margin: 3rem 0;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
             text-align: center;
+            border-radius: 8px;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            max-width: 800px;
             margin: 0 auto;
             padding: 0 1rem;
         }
@@ -595,13 +595,13 @@
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
 
         .stat-label {
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         /* תוספת: תאריך עדכון אחרון */
@@ -659,7 +659,6 @@
         .dark-mode .theme-toggle-icon.moon {
             color: #f8fafc;
         }
-
         /* Admin Controls */
         .admin-controls {
             position: fixed;
@@ -738,16 +737,16 @@
             }
 
             .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 1.5rem;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
             }
 
             .stat-number {
-                font-size: 2.5rem;
+                font-size: 1.75rem;
             }
 
             .stat-label {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
 
             .search-container {
@@ -762,7 +761,15 @@
 
         @media (max-width: 480px) {
             .stats-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
             }
 
             .theme-toggle {
@@ -843,28 +850,6 @@
             </div>
         </div>
 
-        <!-- סטטיסטיקות -->
-        <div class="stats-container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number" id="podcast-count">25+</div>
-                    <div class="stat-label">פודקאסטים</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="article-count">42</div>
-                    <div class="stat-label">כתבות בעיתונים</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="tv-count">18</div>
-                    <div class="stat-label">הופעות בטלוויזיה</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="members-count">5,200+</div>
-                    <div class="stat-label">חברים בקהילה</div>
-                </div>
-            </div>
-        </div>
-
         <section id="podcasts" class="content-section active">
             <h2>פודקאסטים</h2>
             <div class="cards-grid" id="podcasts-container">
@@ -899,6 +884,26 @@
                 <!-- Cards will be added dynamically via JavaScript -->
             </div>
         </section>
+        
+        <!-- סטטיסטיקות - הועברו לתחתית הדף וקטנו -->
+        <div class="container">
+            <div class="stats-container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" id="podcast-count">2+</div>
+                        <div class="stat-label">פודקאסטים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="article-count">2</div>
+                        <div class="stat-label">כתבות בעיתונים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="tv-count">2</div>
+                        <div class="stat-label">הופעות בטלוויזיה</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="container">
@@ -1092,7 +1097,6 @@
                 }
             ]
         };
-
         // עדכון תאריך עדכון אחרון - מעדכן אוטומטית לתאריך היום
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date();
@@ -1319,7 +1323,6 @@
                     });
                 }
             });
-            
             // הצגת התוצאות
             if (results.length > 0) {
                 let html = '';
@@ -1401,7 +1404,6 @@
         document.getElementById('podcast-count').textContent = contentData.podcasts.length + '+';
         document.getElementById('article-count').textContent = contentData.articles.length;
         document.getElementById('tv-count').textContent = contentData.tv.length;
-        // Note: members-count is a static number for now
 
         // Tab switching functionality
         const tabs = document.querySelectorAll('.tab');
@@ -1475,7 +1477,7 @@
             adminPanel.style.display = 'none';
             document.querySelector('.admin-controls').style.display = 'flex';
         });
-// פונקציה להוספת תוכן חדש
+        // פונקציה להוספת תוכן חדש
         addContentBtn.addEventListener('click', () => {
             const contentType = document.getElementById('content-type').value;
             const title = document.getElementById('title-input').value.trim();
