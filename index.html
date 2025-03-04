@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>פרופ' גיל - מגלים את שוק ההון@</title>
+    <title>@פרופ' גיל - מגלים את שוק ההון</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <style>
         :root {
@@ -35,6 +35,19 @@
             padding: 2rem 0;
             text-align: center;
             box-shadow: var(--card-shadow);
+            position: relative;
+        }
+
+        .top-title {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--light-text);
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
         }
 
         .container {
@@ -296,6 +309,26 @@
             display: none;
         }
 
+        /* Visitor Counter Styles */
+        .visitor-counter {
+            position: fixed;
+            bottom: 70px;
+            left: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 998;
+            display: flex;
+            align-items: center;
+        }
+
+        .visitor-counter i {
+            margin-left: 5px;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -309,15 +342,20 @@
             .cards-grid {
                 grid-template-columns: 1fr;
             }
+
+            .top-title {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
+        <div class="top-title">@פרופ' גיל - מגלים את שוק ההון</div>
         <div class="container">
             <div class="header-content">
-                <img src="images/logo.jpg" alt="פרופ' גיל@" class="profile-pic">
-                <h1>פרופ' גיל - מגלים את שוק ההון</h1>
+                <img src="images/logo.jpg" alt="@פרופ' גיל" class="profile-pic">
+                <h1>@פרופ' גיל - מגלים את שוק ההון</h1>
                 <p class="subtitle">מומחה לשוק ההון, כלכלה ופיננסים</p>
                 <a href="#" class="whatsapp-btn" id="whatsapp-group">
                     <i class="fab fa-whatsapp"></i>
@@ -386,10 +424,9 @@
             </div>
         </section>
     </main>
-
-    <footer>
+<footer>
         <div class="container">
-            <p>© 2025 פרופ' גיל - כל הזכויות שמורות</p>
+            <p>© 2025 @פרופ' גיל - כל הזכויות שמורות</p>
             <div class="social-links">
                 <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -473,6 +510,12 @@
         </div>
     </div>
     
+    <!-- Visitor Counter -->
+    <div class="visitor-counter" id="visitor-counter">
+        <i class="fas fa-user-friends"></i>
+        <span id="counter-value">0</span> מבקרים
+    </div>
+    
     <!-- כפתור לפתיחת פאנל המנהל -->
     <button id="open-admin" style="position: fixed; bottom: 20px; left: 20px; padding: 10px; background-color: var(--primary-color); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 999;">
         <i class="fas fa-plus"></i>
@@ -494,13 +537,11 @@
                     link: "https://open.spotify.com/episode/5W28OWhcZ70V7cJkW9fC3i?si=83719dcb8d604499"
                 },
                 {
-                   
-    title: "השפעת הבינה המלאכותית על שוק ההון",
-    date: "2.2.2025",
-    description: "אצל ספקט ורבינוביץ",
-    image: "/api/placeholder/300/180",
-    link: "https://open.spotify.com/episode/0xnVvAlrPgC720XNj8Syhj?si=db5a3932670d40f5"
-
+                    title: "השפעת הבינה המלאכותית על שוק ההון",
+                    date: "2.2.2025",
+                    description: "אצל ספקט ורבינוביץ",
+                    image: "/api/placeholder/300/180",
+                    link: "https://open.spotify.com/episode/0xnVvAlrPgC720XNj8Syhj?si=db5a3932670d40f5"
                 }                
             ],
             
@@ -516,7 +557,7 @@
                 {
                     title: "ראיון מיוחד: המשבר הכלכלי הבא",
                     date: "5 בפברואר, 2025",
-                    description: "בראיון מיוחד ל'דה מרקר', פרופ' גיל מנתח את הסימנים למשבר הכלכלי הבא ואיך להיערך אליו.",
+                    description: "בראיון מיוחד ל'דה מרקר', @פרופ' גיל מנתח את הסימנים למשבר הכלכלי הבא ואיך להיערך אליו.",
                     image: "/api/placeholder/300/180",
                     link: "#"
                 }
@@ -582,21 +623,21 @@
 
         // Function to create a card element
         function createCard(item) {
-    return `
-        <div class="card">
-            <img src="${item.image}" alt="${item.title}" class="card-img">
-            <div class="card-content">
-                <h3 class="card-title">${item.title}</h3>
-                <p class="card-date">${item.date}</p>
-                <p class="card-desc">${item.description}</p>
-                <a href="${item.link}" class="card-link" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-arrow-left"></i>
-                    קרא עוד
-                </a>
-            </div>
-        </div>
-    `;
-}
+            return `
+                <div class="card">
+                    <img src="${item.image}" alt="${item.title}" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">${item.title}</h3>
+                        <p class="card-date">${item.date}</p>
+                        <p class="card-desc">${item.description}</p>
+                        <a href="${item.link}" class="card-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-arrow-left"></i>
+                            קרא עוד
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
 
         // Function to populate a container with cards
         function populateContainer(containerId, items) {
@@ -748,6 +789,26 @@
             resultMessage.style.padding = '10px';
             resultMessage.style.borderRadius = '4px';
         }
+
+        // מונה מבקרים
+        window.addEventListener('load', () => {
+            // בדיקה אם יש ערך קיים ב-localStorage
+            let visitorCount = localStorage.getItem('visitorCount');
+            
+            if (!visitorCount) {
+                // אם אין ערך, מתחילים מ-1
+                visitorCount = 1;
+            } else {
+                // אם יש ערך, מעלים ב-1
+                visitorCount = parseInt(visitorCount) + 1;
+            }
+            
+            // שמירת הערך החדש
+            localStorage.setItem('visitorCount', visitorCount);
+            
+            // הצגת המונה בעמוד
+            document.getElementById('counter-value').textContent = visitorCount;
+        });
     </script>
 </body>
 </html>
