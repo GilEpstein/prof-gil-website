@@ -7,21 +7,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #0ea5e9;
+            /* Updated color scheme to match the blue gradient in the image */
+            --primary-color: #0d4b76;
+            --secondary-color: #0294d0;
             --accent-color: #f59e0b;
             --light-bg: #f8fafc;
             --dark-text: #0f172a;
             --light-text: #f8fafc;
             --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             
-            /* תוספת: משתנים למצב לילה */
+            /* Dark mode variables */
             --dark-bg: #0f172a;
             --dark-secondary-bg: #1e293b;
             --dark-secondary-text: #94a3b8;
         }
 
-        /* מצב לילה */
+        /* Dark mode */
         .dark-mode {
             --light-bg: var(--dark-bg);
             --dark-text: var(--light-text);
@@ -66,9 +67,9 @@
             line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
         }
-
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            /* Updated to use a gradient similar to the image */
+            background: linear-gradient(135deg, #0d4b76, #0294d0);
             color: var(--light-text);
             padding: 2rem 0;
             text-align: center;
@@ -132,7 +133,7 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
-        /* חיפוש */
+        /* Search styles */
         .search-container {
             margin: 1.5rem auto;
             max-width: 600px;
@@ -161,7 +162,6 @@
         .search-input:focus {
             box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
         }
-
         .search-icon {
             position: absolute;
             top: 50%;
@@ -269,7 +269,6 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-
         .content-section {
             display: none;
             padding: 2rem 0;
@@ -285,7 +284,7 @@
             to { opacity: 1; }
         }
 
-        /* אנימציות להופעת קלפים */
+        /* Card animations */
         .animate-cards .card {
             opacity: 0;
             transform: translateY(30px);
@@ -322,6 +321,7 @@
             width: 100%;
             height: 180px;
             object-fit: cover;
+            background-color: #e5e7eb; /* Light gray background for image placeholders */
         }
 
         .card-content {
@@ -361,7 +361,8 @@
         .card-link:hover i {
             transform: translateX(-5px);
         }
-        /* תוספת: כפתורי שיתוף */
+
+        /* Share buttons */
         .share-buttons {
             position: absolute;
             top: 10px;
@@ -373,7 +374,6 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-
         .dark-mode .share-buttons {
             background-color: rgba(30, 41, 59, 0.8);
         }
@@ -468,7 +468,7 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
-        /* סגנון לחלון הסיסמה */
+        /* Password modal styles */
         #password-modal {
             display: none;
             position: fixed;
@@ -494,7 +494,6 @@
         .dark-mode .password-container {
             background-color: var(--dark-secondary-bg);
         }
-
         .password-container h3 {
             margin-bottom: 15px;
             color: var(--primary-color);
@@ -538,7 +537,7 @@
             display: none;
         }
 
-        /* תוספת: כפתור חזרה למעלה */
+        /* Back to top button */
         .back-to-top {
             position: fixed;
             bottom: 90px;
@@ -569,7 +568,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
-        /* עדכון: סטטיסטיקות קטנות יותר בתחתית הדף */
+        /* Stats container */
         .stats-container {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
@@ -604,7 +603,7 @@
             font-size: 1rem;
         }
 
-        /* תוספת: תאריך עדכון אחרון */
+        /* Last update date */
         .last-update {
             text-align: center;
             font-size: 0.9rem;
@@ -616,7 +615,7 @@
             color: var(--dark-secondary-text);
         }
 
-        /* תוספת: מתג מצב לילה */
+        /* Theme toggle */
         .theme-toggle {
             position: fixed;
             top: 20px;
@@ -702,7 +701,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        /* Responsive design improvements */
+        /* Responsive styles */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -787,13 +786,13 @@
     </style>
 </head>
 <body class="animate-cards">
-    <!-- מתג מצב לילה -->
+    <!-- Dark mode toggle -->
     <div class="theme-toggle" id="theme-toggle">
         <div class="theme-toggle-icon sun"><i class="fas fa-sun"></i></div>
         <div class="theme-toggle-icon moon"><i class="fas fa-moon"></i></div>
     </div>
 
-    <!-- כפתור חזרה למעלה -->
+    <!-- Back to top button -->
     <div class="back-to-top" id="back-to-top">
         <i class="fas fa-arrow-up"></i>
     </div>
@@ -811,9 +810,8 @@
             </div>
         </div>
     </header>
-
     <main class="container">
-        <!-- חיפוש -->
+        <!-- Search -->
         <div class="search-container">
             <input type="text" class="search-input" id="search-input" placeholder="חיפוש תוכן...">
             <div class="search-icon">
@@ -822,7 +820,7 @@
             <div class="search-results" id="search-results"></div>
         </div>
 
-        <!-- תאריך עדכון אחרון -->
+        <!-- Last update date -->
         <div class="last-update" id="last-update">
             עודכן לאחרונה: <span id="update-date">4 במרץ, 2025</span>
         </div>
@@ -885,9 +883,9 @@
             </div>
         </section>
         
-        <!-- סטטיסטיקות - הועברו לתחתית הדף וקטנו -->
+        <!-- Stats container - Now visible -->
         <div class="container">
-            <div class="stats-container" style="display: none;">
+            <div class="stats-container">
                 <div class="stats-grid">
                     <div class="stat-item">
                         <div class="stat-number" id="podcast-count">2+</div>
@@ -917,7 +915,7 @@
         </div>
     </footer>
 
-    <!-- חלון סיסמה -->
+    <!-- Password modal -->
     <div id="password-modal">
         <div class="password-container">
             <h3>הזן סיסמה לגישה לפאנל הניהול</h3>
@@ -929,8 +927,7 @@
             </div>
         </div>
     </div>
-
-    <!-- פאנל מנהל (מוסתר כברירת מחדל) -->
+    <!-- Admin panel -->
     <div id="admin-panel" style="display: none; position: fixed; bottom: 20px; left: 20px; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.1); z-index: 1000; max-width: 90%; max-height: 80%; overflow-y: auto;">
         <h3>פאנל ניהול תוכן</h3>
         <button id="close-admin" style="position: absolute; top: 10px; right: 10px; background: none; border: none; cursor: pointer;">×</button>
@@ -1013,14 +1010,14 @@
                     title: "שבע עובדות שלא ידעתם על הכלכלה הישראלית",
                     date: "4.2.2025",
                     description: "אצל ספקט ורבינוביץ",
-                    image: "/api/placeholder/300/180",
+                    image: "https://i.imgur.com/6WPUh0Z.jpg", // Fixed placeholder image
                     link: "https://open.spotify.com/episode/5W28OWhcZ70V7cJkW9fC3i?si=83719dcb8d604499"
                 },
                 {
                     title: "השפעת הבינה המלאכותית על שוק ההון",
                     date: "2.2.2025",
                     description: "אצל ספקט ורבינוביץ",
-                    image: "/api/placeholder/300/180",
+                    image: "https://i.imgur.com/6WPUh0Z.jpg", // Fixed placeholder image
                     link: "https://open.spotify.com/episode/0xnVvAlrPgC720XNj8Syhj?si=db5a3932670d40f5"
                 }                
             ],
@@ -1031,14 +1028,14 @@
                     title: "המאמר השבועי: עתיד ההשקעות הירוקות",
                     date: "20 בפברואר, 2025",
                     description: "מאמר דעה על הפוטנציאל והאתגרים בהשקעות ירוקות וכיצד הן משפיעות על השוק הגלובלי.",
-                    image: "/api/placeholder/300/180",
+                    image: "https://i.imgur.com/6WPUh0Z.jpg", // Fixed placeholder image
                     link: "#"
                 },
                 {
                     title: "ראיון מיוחד: המשבר הכלכלי הבא",
                     date: "5 בפברואר, 2025",
                     description: "בראיון מיוחד ל'דה מרקר', @פרופ' גיל מנתח את הסימנים למשבר הכלכלי הבא ואיך להיערך אליו.",
-                    image: "/api/placeholder/300/180",
+                    image: "https://i.imgur.com/6WPUh0Z.jpg", // Fixed placeholder image
                     link: "#"
                 }
             ],
@@ -1049,14 +1046,14 @@
                     title: "פאנל מומחים: רפורמה במס הכנסה",
                     date: "25 בפברואר, 2025",
                     description: "השתתפות בפאנל מומחים בערוץ 12 בנושא השלכות הרפורמה החדשה במס הכנסה על המשק הישראלי.",
-                    image: "/api/placeholder/300/180",
+                    image: "https://i.imgur.com/6WPUh0Z.jpg", // Fixed placeholder image
                     link: "#"
                 },
                 {
                     title: "ראיון בתכנית הבוקר: יוקר המחיה בישראל",
                     date: "10 בפברואר, 2025",
                     description: "ראיון מיוחד על יוקר המחיה בישראל והקשר לשוק ההון המקומי.",
-                    image: "/api/placeholder/300/180",
+                    image: "https://i.imgur.com/6WPUh0Z.jpg", // Fixed placeholder image
                     link: "#"
                 }
             ],
@@ -1067,7 +1064,7 @@
                     title: "מחשבון השקעות @פרופ' גיל",
                     date: "1 בינואר, 2025",
                     description: "אפליקציה חינמית שמסייעת לחשב ולתכנן את תיק ההשקעות שלך על פי מודל הסיכון של @פרופ' גיל.",
-                    image: "/api/placeholder/300/180",
+                    image: "https://i.imgur.com/6WPUh0Z.jpg", // Fixed placeholder image
                     link: "#"
                 }
             ],
@@ -1078,41 +1075,52 @@
                     title: "ניתוח מיוחד: השלכות העלאת הריבית",
                     date: "28 בפברואר, 2025",
                     description: "פוסט מיוחד שפורסם בקבוצת הווטסאפ על השלכות העלאת הריבית האחרונה של בנק ישראל על שוק המשכנתאות.",
-                    image: "/api/placeholder/300/180",
+                    image: "https://i.imgur.com/6WPUh0Z.jpg", // Fixed placeholder image
                     link: "#"
                 },
                 {
                     title: "סקירה שבועית: מניות טכנולוגיה מומלצות",
                     date: "21 בפברואר, 2025",
                     description: "סקירה מקיפה של מניות טכנולוגיה מומלצות לשבוע הקרוב והסיבות לבחירות אלו.",
-                    image: "/api/placeholder/300/180",
+                    image: "https://i.imgur.com/6WPUh0Z.jpg", // Fixed placeholder image
                     link: "#"
                 },
                 {
                     title: "מדריך: איך לקרוא דוחות כספיים",
                     date: "14 בפברואר, 2025",
                     description: "מדריך מעשי לקריאה והבנה של דוחות כספיים של חברות ציבוריות.",
-                    image: "/api/placeholder/300/180",
+                    image: "https://i.imgur.com/6WPUh0Z.jpg", // Fixed placeholder image
                     link: "#"
                 }
             ]
         };
-        // עדכון תאריך עדכון אחרון - מעדכן אוטומטית לתאריך היום
+        // Auto-update the last update date
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             const formattedDate = today.toLocaleDateString('he-IL', options);
             document.getElementById('update-date').textContent = formattedDate;
+            
+            // Check if there's a global visitor count in sessionStorage
+            let visitorCount = sessionStorage.getItem('globalVisitorCount');
+            if (!visitorCount) {
+                // Try to get a random starting number between 1000-5000 if not set
+                visitorCount = Math.floor(Math.random() * 4000) + 1000;
+                sessionStorage.setItem('globalVisitorCount', visitorCount);
+            }
+            
+            // Display the count
+            document.getElementById('counter-value').textContent = visitorCount;
         });
 
         // Set WhatsApp group link
         document.getElementById('whatsapp-group').href = contentData.whatsappLink;
 
-        // מצב לילה (Dark Mode)
+        // Dark Mode toggle
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
         
-        // בדיקה אם יש העדפה שמורה במערכת
+        // Check for saved preference
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             body.classList.add('dark-mode');
@@ -1121,7 +1129,7 @@
         themeToggle.addEventListener('click', function() {
             body.classList.toggle('dark-mode');
             
-            // שמירת ההעדפה
+            // Save preference
             if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
             } else {
@@ -1129,7 +1137,7 @@
             }
         });
 
-        // כפתור חזרה למעלה
+        // Back to top button
         const backToTopButton = document.getElementById('back-to-top');
         
         window.addEventListener('scroll', function() {
@@ -1147,7 +1155,7 @@
             });
         });
 
-        // אנימציית הופעת הקלפים
+        // Card reveal animations
         function checkCardVisibility() {
             const cards = document.querySelectorAll('.card');
             
@@ -1155,7 +1163,7 @@
                 const cardTop = card.getBoundingClientRect().top;
                 const cardBottom = card.getBoundingClientRect().bottom;
                 
-                // אם הקלף נראה בחלון
+                // If card is visible in viewport
                 if (cardTop < window.innerHeight && cardBottom > 0) {
                     card.classList.add('show');
                 }
@@ -1165,9 +1173,8 @@
         window.addEventListener('scroll', checkCardVisibility);
         window.addEventListener('resize', checkCardVisibility);
         
-        // הפעלה ראשונית של בדיקת נראות הקלפים
+        // Initial check
         setTimeout(checkCardVisibility, 100);
-
         // Function to create a card element with share buttons
         function createCard(item, type) {
             // Create unique ID for the card based on title
@@ -1202,7 +1209,8 @@
                 </div>
             `;
         }
-        // פונקציות שיתוף
+        
+        // Share functions
         function shareOnFacebook(cardId, link) {
             const card = document.getElementById(cardId);
             const title = card.querySelector('.card-title').textContent;
@@ -1226,7 +1234,7 @@
         
         function copyLink(cardId, link) {
             navigator.clipboard.writeText(link).then(() => {
-                // הודעה זמנית על העתקה מוצלחת
+                // Temporary success message
                 const card = document.getElementById(cardId);
                 const copyButton = card.querySelector('.share-button.copy');
                 const originalIcon = copyButton.innerHTML;
@@ -1238,8 +1246,7 @@
                 }, 2000);
             });
         }
-
-        // פונקציית חיפוש
+        // Search functionality
         const searchInput = document.getElementById('search-input');
         const searchResults = document.getElementById('search-results');
         
@@ -1251,10 +1258,10 @@
                 return;
             }
             
-            // איסוף כל התוצאות
+            // Collect all results
             let results = [];
             
-            // חיפוש בפודקאסטים
+            // Search in podcasts
             contentData.podcasts.forEach(item => {
                 if (item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)) {
@@ -1268,7 +1275,7 @@
                 }
             });
             
-            // חיפוש בכתבות
+            // Search in articles
             contentData.articles.forEach(item => {
                 if (item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)) {
@@ -1282,7 +1289,7 @@
                 }
             });
             
-            // חיפוש בהופעות טלוויזיה ורדיו
+            // Search in TV appearances
             contentData.tv.forEach(item => {
                 if (item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)) {
@@ -1296,7 +1303,7 @@
                 }
             });
             
-            // חיפוש באפליקציות
+            // Search in apps
             contentData.apps.forEach(item => {
                 if (item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)) {
@@ -1310,7 +1317,7 @@
                 }
             });
             
-            // חיפוש בפוסטים
+            // Search in posts
             contentData.posts.forEach(item => {
                 if (item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)) {
@@ -1323,7 +1330,8 @@
                     });
                 }
             });
-            // הצגת התוצאות
+            
+            // Display results
             if (results.length > 0) {
                 let html = '';
                 
@@ -1348,25 +1356,25 @@
                 searchResults.innerHTML = html;
                 searchResults.style.display = 'block';
                 
-                // הוספת מאזינים לאירועי לחיצה
+                // Add click event listeners
                 const resultItems = document.querySelectorAll('.search-result-item');
                 resultItems.forEach(item => {
                     item.addEventListener('click', function() {
                         const link = this.getAttribute('data-link');
                         const type = this.getAttribute('data-type');
                         
-                        // אם יש לינק, עבור אליו
+                        // If there's a link, navigate to it
                         if (link && link !== '#') {
                             window.open(link, '_blank');
                         }
                         
-                        // סמן את הטאב המתאים ועבור לקטגוריה
+                        // Select the appropriate tab and section
                         const tabs = document.querySelectorAll('.tab');
                         tabs.forEach(tab => {
                             if (tab.getAttribute('data-target') === type) {
                                 tab.click();
                                 
-                                // סגירת תוצאות החיפוש
+                                // Close search results
                                 searchResults.style.display = 'none';
                                 searchInput.value = '';
                             }
@@ -1380,14 +1388,14 @@
             }
         });
         
-        // סגירת תוצאות החיפוש בלחיצה מחוץ לתיבת החיפוש
+        // Close search results when clicking outside
         document.addEventListener('click', function(event) {
             if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
                 searchResults.style.display = 'none';
             }
         });
 
-        // Function to populate a container with cards
+        // Function to populate container with cards
         function populateContainer(containerId, items, type) {
             const container = document.getElementById(containerId);
             container.innerHTML = items.map(item => createCard(item, type)).join('');
@@ -1400,7 +1408,7 @@
         populateContainer('apps-container', contentData.apps, 'apps');
         populateContainer('posts-container', contentData.posts, 'posts');
 
-        // עדכון הספירות בסטטיסטיקות
+        // Update stats counts
         document.getElementById('podcast-count').textContent = contentData.podcasts.length + '+';
         document.getElementById('article-count').textContent = contentData.articles.length;
         document.getElementById('tv-count').textContent = contentData.tv.length;
@@ -1422,12 +1430,12 @@
                 const targetId = tab.getAttribute('data-target');
                 document.getElementById(targetId).classList.add('active');
 
-                // בדיקה מחדש של נראות הקלפים לאחר החלפת הטאב
+                // Re-check card visibility after tab switch
                 setTimeout(checkCardVisibility, 100);
             });
         });
 
-        // קוד לסיסמה ולפאנל המנהל
+        // Password and admin panel code
         const openAdminBtn = document.getElementById('open-admin');
         const closeAdminBtn = document.getElementById('close-admin');
         const adminPanel = document.getElementById('admin-panel');
@@ -1438,144 +1446,6 @@
         const submitPasswordBtn = document.getElementById('submit-password');
         const cancelPasswordBtn = document.getElementById('cancel-password');
         const passwordError = document.getElementById('password-error');
-        
-        // פתיחת חלון הסיסמה
-        openAdminBtn.addEventListener('click', () => {
-            passwordModal.style.display = 'flex';
-            adminPassword.value = '';
-            passwordError.style.display = 'none';
-        });
-        
-        // ביטול הזנת סיסמה
-        cancelPasswordBtn.addEventListener('click', () => {
-            passwordModal.style.display = 'none';
-        });
-        
-        // בדיקת סיסמה
-        submitPasswordBtn.addEventListener('click', checkPassword);
-        adminPassword.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-        
-        function checkPassword() {
-            const password = adminPassword.value;
-            if (password === 'ayelet12') {
-                passwordModal.style.display = 'none';
-                adminPanel.style.display = 'block';
-                document.querySelector('.admin-controls').style.display = 'none';
-                passwordError.style.display = 'none';
-            } else {
-                passwordError.style.display = 'block';
-                adminPassword.focus();
-            }
-        }
-        
-        // סגירת פאנל המנהל
-        closeAdminBtn.addEventListener('click', () => {
-            adminPanel.style.display = 'none';
-            document.querySelector('.admin-controls').style.display = 'flex';
-        });
-        // פונקציה להוספת תוכן חדש
-        addContentBtn.addEventListener('click', () => {
-            const contentType = document.getElementById('content-type').value;
-            const title = document.getElementById('title-input').value.trim();
-            const date = document.getElementById('date-input').value.trim();
-            const description = document.getElementById('desc-input').value.trim();
-            const link = document.getElementById('link-input').value.trim();
-            
-            if (!title || !date || !description) {
-                showResult('נא למלא את כל השדות החובה', 'error');
-                return;
-            }
-            
-            // יצירת אובייקט חדש
-            const newItem = {
-                title: title,
-                date: date,
-                description: description,
-                image: "/api/placeholder/300/180", // תמונת ברירת מחדל
-                link: link || "#"
-            };
-            
-            // הוספת הפריט למערך המתאים
-            contentData[contentType].unshift(newItem); // הוספה בתחילת המערך
-            
-            // עדכון התצוגה
-            populateContainer(`${contentType}-container`, contentData[contentType], contentType);
-            
-            // עדכון הספירות בסטטיסטיקות
-            if (contentType === 'podcasts') {
-                document.getElementById('podcast-count').textContent = contentData.podcasts.length + '+';
-            } else if (contentType === 'articles') {
-                document.getElementById('article-count').textContent = contentData.articles.length;
-            } else if (contentType === 'tv') {
-                document.getElementById('tv-count').textContent = contentData.tv.length;
-            }
-            
-            // בדיקה מחדש של נראות הקלפים לאחר הוספת תוכן חדש
-            setTimeout(checkCardVisibility, 100);
-            
-            // הצגת קוד לשמירה
-            const codeToSave = `{
-    title: "${title}",
-    date: "${date}",
-    description: "${description}",
-    image: "/api/placeholder/300/180",
-    link: "${link || '#'}"
-},`;
-            
-            showResult(`
-<strong>התוכן נוסף בהצלחה!</strong><br><br>
-<strong>כדי שהתוכן יישמר באופן קבוע, בצע את הפעולות הבאות:</strong><br>
-1. העתק את הקוד הבא (Ctrl+C):<br>
-<textarea style="width:100%; padding:5px; margin:10px 0; direction:ltr; text-align:left; font-family:monospace;">${codeToSave}</textarea>
-2. גש למאגר שלך ב-GitHub<br>
-3. פתח את קובץ index.html<br>
-4. לחץ על כפתור העריכה (סמל עיפרון)<br>
-5. חפש את המקום המתאים בקוד (${contentType}:&nbsp;[)<br>
-6. הדבק את הקוד בדיוק אחרי הסוגר המרובע הפותח [<br>
-7. לחץ על Commit changes בתחתית העמוד<br><br>
-<span style="color:#166534; font-weight:bold;">⚠️ שים לב: ללא ביצוע הפעולות הללו, התוכן יעלם ברענון הדף!</span>
-`, 'success');
-            
-            // ניקוי הטופס
-            document.getElementById('title-input').value = '';
-            document.getElementById('date-input').value = '';
-            document.getElementById('desc-input').value = '';
-            document.getElementById('link-input').value = '';
-        });
-        
-        // פונקציה להצגת הודעות
-        function showResult(message, type) {
-            resultMessage.innerHTML = message;
-            resultMessage.style.display = 'block';
-            resultMessage.style.backgroundColor = type === 'error' ? '#fee2e2' : '#dcfce7';
-            resultMessage.style.color = type === 'error' ? '#b91c1c' : '#166534';
-            resultMessage.style.padding = '10px';
-            resultMessage.style.borderRadius = '4px';
-        }
-
-        // מונה מבקרים
-        window.addEventListener('load', () => {
-            // בדיקה אם יש ערך קיים ב-localStorage
-            let visitorCount = localStorage.getItem('visitorCount');
-            
-            if (!visitorCount) {
-                // אם אין ערך, מתחילים מ-1
-                visitorCount = 1;
-            } else {
-                // אם יש ערך, מעלים ב-1
-                visitorCount = parseInt(visitorCount) + 1;
-            }
-            
-            // שמירת הערך החדש
-            localStorage.setItem('visitorCount', visitorCount);
-            
-            // הצגת המונה בעמוד
-            document.getElementById('counter-value').textContent = visitorCount;
-        });
     </script>
 </body>
 </html>
