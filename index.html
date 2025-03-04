@@ -1557,25 +1557,21 @@
             resultMessage.style.borderRadius = '4px';
         }
 
-        // מונה מבקרים
-        window.addEventListener('load', () => {
-            // בדיקה אם יש ערך קיים ב-localStorage
-            let visitorCount = localStorage.getItem('visitorCount');
-            
-            if (!visitorCount) {
-                // אם אין ערך, מתחילים מ-1
-                visitorCount = 1;
-            } else {
-                // אם יש ערך, מעלים ב-1
-                visitorCount = parseInt(visitorCount) + 1;
-            }
-            
-            // שמירת הערך החדש
-            localStorage.setItem('visitorCount', visitorCount);
-            
-            // הצגת המונה בעמוד
-            document.getElementById('counter-value').textContent = visitorCount;
-        });
+       
     </script>
 </body>
+    <!-- הוסף את הקוד הזה לתוך ה-head של העמוד, לפני תגית ה-</head> -->
+<head>
+    <!-- קוד קיים... -->
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWBYT3XB6Q"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'G-QWBYT3XB6Q');
+    </script>
+</head>
 </html>
