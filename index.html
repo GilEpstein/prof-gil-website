@@ -838,7 +838,7 @@
             </div>
             <div class="tab" data-target="tv">
                 <i class="fas fa-tv"></i>
-                הופעות בטלוויזיה
+                הופעות בטלוויזיה ורדיו
             </div>
             <div class="tab" data-target="apps">
                 <i class="fas fa-mobile-alt"></i>
@@ -865,7 +865,7 @@
         </section>
 
         <section id="tv" class="content-section">
-            <h2>הופעות בטלוויזיה</h2>
+            <h2>הופעות בטלוויזיה ורדיו</h2>
             <div class="cards-grid" id="tv-container">
                 <!-- Cards will be added dynamically via JavaScript -->
             </div>
@@ -899,7 +899,7 @@
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" id="tv-count">2</div>
-                        <div class="stat-label">הופעות בטלוויזיה</div>
+                        <div class="stat-label">הופעות בטלוויזיה ורדיו ורדיו ורדיו</div>
                     </div>
                 </div>
             </div>
@@ -940,7 +940,7 @@
             <select id="content-type">
                 <option value="podcasts">פודקאסטים</option>
                 <option value="articles">כתבות</option>
-                <option value="tv">הופעות בטלוויזיה</option>
+                <option value="tv">הופעות בטלוויזיה ורדיו</option>
                 <option value="apps">אפליקציות</option>
                 <option value="posts">פוסטים חשובים</option>
             </select>
@@ -1282,7 +1282,7 @@
                 }
             });
             
-            // חיפוש בהופעות טלוויזיה
+            // חיפוש בהופעות טלוויזיה ורדיו
             contentData.tv.forEach(item => {
                 if (item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)) {
@@ -1331,7 +1331,7 @@
                     const typeNames = {
                         podcasts: 'פודקאסט',
                         articles: 'כתבה',
-                        tv: 'הופעה בטלוויזיה',
+                        tv: 'הופעה בטלוויזיה ורדיו',
                         apps: 'אפליקציה',
                         posts: 'פוסט'
                     };
