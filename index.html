@@ -1268,38 +1268,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Function to create a card element with share buttons
         function createCard(item, type) {
-            // Create unique ID for the card based on title
-            const cardId = `card-${type}-${item.title.replace(/\s+/g, '-').toLowerCase()}`;
-            
-            return `
-                <div class="card" id="${cardId}">
-                    <img src="${item.image}" alt="${item.title}" class="card-img">
-                    <div class="share-buttons">
-                        <button class="share-button facebook" onclick="shareOnFacebook('${cardId}', '${item.link}')">
-                            <i class="fab fa-facebook-f"></i>
-                        </button>
-                        <button class="share-button twitter" onclick="shareOnTwitter('${cardId}', '${item.link}')">
-                            <i class="fab fa-twitter"></i>
-                        </button>
-                        <button class="share-button whatsapp" onclick="shareOnWhatsApp('${cardId}', '${item.link}')">
-                            <i class="fab fa-whatsapp"></i>
-                        </button>
-                        <button class="share-button copy" onclick="copyLink('${cardId}', '${item.link}')">
-                            <i class="fas fa-link"></i>
-                        </button>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">${item.title}</h3>
-                        <p class="card-date">${item.date}</p>
-                        <p class="card-desc">${item.description}</p>
-                        <a href="${item.link}" class="card-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-arrow-left"></i>
-                            קרא עוד
-                        </a>
-                    </div>
-                </div>
-            `;
-        }
+    // Create unique ID for the card based on title
+    const cardId = `card-${type}-${item.title.replace(/\s+/g, '-').toLowerCase()}`;
+    
+    // הסר את הכותרת המיותרת
+    return `
+        <div class="card" id="${cardId}">
+            <img src="${item.image}" alt="${item.title}" class="card-img">
+            <div class="share-buttons">
+                <!-- כפתורי שיתוף נשארים כפי שהם -->
+                <button class="share-button facebook" onclick="shareOnFacebook('${cardId}', '${item.link}')">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+                <button class="share-button twitter" onclick="shareOnTwitter('${cardId}', '${item.link}')">
+                    <i class="fab fa-twitter"></i>
+                </button>
+                <button class="share-button whatsapp" onclick="shareOnWhatsApp('${cardId}', '${item.link}')">
+                    <i class="fab fa-whatsapp"></i>
+                </button>
+                <button class="share-button copy" onclick="copyLink('${cardId}', '${item.link}')">
+                    <i class="fas fa-link"></i>
+                </button>
+            </div>
+            <div class="card-content">
+                <p class="card-date">${item.date}</p>
+                <p class="card-desc">${item.description}</p>
+                <a href="${item.link}" class="card-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-arrow-left"></i>
+                    קרא עוד
+                </a>
+            </div>
+        </div>
+    `;
+}
         // פונקציות שיתוף
         function shareOnFacebook(cardId, link) {
             const card = document.getElementById(cardId);
