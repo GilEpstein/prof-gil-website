@@ -479,7 +479,27 @@ body:not(.dark-mode) .card {
     background-color: white;
     color: #0f172a;
 }
+/* תיקון כפתורים לבנים על רקע לבן */
+body:not(.dark-mode) .tab-container .tab {
+    background-color: #e6f0f9;  /* רקע תכלת בהיר לכפתורים */
+    color: #0d3b56;             /* טקסט בצבע כחול כהה */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* הוספת צל קל לכפתורים */
+}
 
+body:not(.dark-mode) .tab-container .tab:hover {
+    background-color: #d0e7f7;  /* צבע בהיר יותר בריחוף */
+}
+
+body:not(.dark-mode) .tab-container .tab.active {
+    background-color: var(--accent-color);  /* כפתור פעיל נשאר בצבע האקסנט */
+    color: white;
+}
+
+/* תיקון לכפתור וואטסאפ אם צריך */
+body:not(.dark-mode) .whatsapp-btn {
+    background-color: #25D366;  /* צבע וואטסאפ סטנדרטי */
+    color: white;
+}
 /* וכל ההגדרות הנוספות שנתתי... */
         footer {
             background-color: var(--primary-color);
