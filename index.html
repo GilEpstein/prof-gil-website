@@ -469,7 +469,18 @@ body {
         .dark-mode .share-button.copy {
             color: var(--dark-secondary-text);
         }
+/* מצב יום מותאם (לא מצב לילה) */
+body:not(.dark-mode) {
+    background-color: #f0f9ff;  /* רקע בהיר עם גוון כחלחל קל */
+    color: #0f172a;  /* טקסט כהה */
+}
 
+body:not(.dark-mode) .card {
+    background-color: white;
+    color: #0f172a;
+}
+
+/* וכל ההגדרות הנוספות שנתתי... */
         footer {
             background-color: var(--primary-color);
             color: var(--light-text);
@@ -679,21 +690,21 @@ body {
             font-size: 1.2rem;
         }
 
-        .theme-toggle-icon.sun {
-            color: #f59e0b;
-        }
+       .theme-toggle-icon.sun {
+    color: #6b7280;
+}
 
-        .theme-toggle-icon.moon {
-            color: #6b7280;
-        }
+.theme-toggle-icon.moon {
+    color: #f59e0b;
+}
 
-        .dark-mode .theme-toggle-icon.sun {
-            color: #6b7280;
-        }
+.dark-mode .theme-toggle-icon.sun {
+    color: #6b7280;
+}
 
-        .dark-mode .theme-toggle-icon.moon {
-            color: #f8fafc;
-        }
+.dark-mode .theme-toggle-icon.moon {
+    color: #f8fafc;
+}
         /* Admin Controls */
         .admin-controls {
             position: fixed;
@@ -821,7 +832,7 @@ body {
         }
     </style>
 </head>
-<body class="animate-cards">
+<body class="animate-cards dark-mode">
     <!-- מתג מצב לילה -->
     <div class="theme-toggle" id="theme-toggle">
         <div class="theme-toggle-icon sun"><i class="fas fa-sun"></i></div>
@@ -1144,11 +1155,13 @@ body {
         const body = document.body;
         
         // בדיקה אם יש העדפה שמורה במערכת
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-mode');
-        }
-
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+    body.classList.remove('dark-mode');
+} else {
+    // ברירת המחדל היא מצב לילה
+    localStorage.setItem('theme', 'dark');
+}
         themeToggle.addEventListener('click', function() {
             body.classList.toggle('dark-mode');
             
