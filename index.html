@@ -7,19 +7,54 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #0ea5e9;
-            --accent-color: #f59e0b;
-            --light-bg: #f8fafc;
-            --dark-text: #0f172a;
-            --light-text: #f8fafc;
-            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            
-            /* תוספת: משתנים למצב לילה */
-            --dark-bg: #0f172a;
-            --dark-secondary-bg: #1e293b;
-            --dark-secondary-text: #94a3b8;
-        }
+            /* New color scheme based on the image */
+    --primary-color: #0d3b56;       /* Darker blue from the image background */
+    --secondary-color: #1d9e74;     /* Green accent from the bull icon */
+    --accent-color: #34a7e0;        /* Lighter blue accent */
+    --light-bg: #0c4566;            /* Lighter blue-green for content background */
+    --dark-text: #ffffff;           /* White text for better contrast on dark background */
+    --light-text: #f8fafc;          /* Light text color */
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    
+    /* Dark mode variables */
+    --dark-bg: #04263c;             /* Darker blue-green for dark mode */
+    --dark-secondary-bg: #0a324e;   /* Slightly lighter background for cards in dark mode */
+    --dark-secondary-text: #a8c5d6; /* Light blue text for secondary content */
+}
+Copy/* Additional changes needed for the new color scheme */
+body {
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+}
+
+.card {
+    background-color: var(--dark-secondary-bg);
+    color: var(--light-text);
+}
+
+.card-date {
+    color: var(--dark-secondary-text);
+}
+
+.tab {
+    background-color: var(--dark-secondary-bg);
+    color: var(--light-text);
+}
+
+.search-input {
+    background-color: var(--dark-secondary-bg);
+    color: var(--light-text);
+}
+
+/* Ensure share buttons have proper contrast */
+.share-buttons {
+    background-color: rgba(10, 50, 78, 0.8);
+}
+
+.share-button {
+    background-color: var(--dark-secondary-bg);
+    color: var(--light-text);
+}
 
         /* מצב לילה */
         .dark-mode {
@@ -68,7 +103,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
             color: var(--light-text);
             padding: 2rem 0;
             text-align: center;
@@ -570,14 +605,14 @@
         }
 
         /* עדכון: סטטיסטיקות קטנות יותר בתחתית הדף */
-        .stats-container {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
-            text-align: center;
-            border-radius: 8px;
-        }
+      .stats-container {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    text-align: center;
+    border-radius: 8px;
+}
 
         .stats-grid {
             display: grid;
