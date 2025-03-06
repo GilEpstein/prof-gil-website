@@ -868,10 +868,7 @@ body:not(.dark-mode) .back-to-top.visible {
     </style>
 </head>
 <body class="animate-cards dark-mode">
-    <!-- כפתור חזרה למעלה -->
-    <div class="back-to-top" id="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </div>
+    
     <!-- מתג מצב לילה -->
     <div class="theme-toggle" id="theme-toggle">
         <div class="theme-toggle-icon sun"><i class="fas fa-sun"></i></div>
@@ -1651,39 +1648,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
        
     </script>
-</body>
-    <!-- הוסף את הקוד הזה לתוך ה-head של העמוד, לפני תגית ה-</head> -->
-<head>
-    <!-- קוד קיים... -->
-    
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWBYT3XB6Q"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        
-        gtag('config', 'G-QWBYT3XB6Q');
-    </script>
-</head>
-<script>
-// בדיקת תקינות הכפתור חזרה למעלה
-setTimeout(function() {
-    const btn = document.getElementById('back-to-top');
-    if (btn) {
-        console.log('כפתור חזרה למעלה נמצא בדף');
-        // גרום לכפתור להיות נראה זמנית לבדיקה
-        btn.style.opacity = '1';
-        btn.style.visibility = 'visible';
-        
-        // החזר למצב הרגיל אחרי 3 שניות
-        setTimeout(function() {
-            btn.style.opacity = '';
-            btn.style.visibility = '';
-        }, 3000);
-    } else {
-        console.error('כפתור חזרה למעלה לא נמצא!');
+// קוד ליצירת כפתור חזרה למעלה באופן דינמי
+document.addEventListener('DOMContentLoaded', function() {
+    // הסר כפתור קיים אם יש
+    const existingButton = document.getElementById('back-to-top');
+    if (existingButton) {
+        existingButton.remove();
     }
-}, 2000);
+    
+    // צור כפתור חדש
+    const newButton = document.createElement('div');
+    newButton.className = 'back-to-top';
+    newButton.id = 'back-to-top';
+    newButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    
+    // הוסף את הכפתור לתחילת ה-body
+    document.body.prepend(newButton);
+    
+    // הוסף מאזיני אירועים
+    newButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // הראה/הסתר כפתור בהתאם לגלילה
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 200) {
+            newButton.classList.add('visible');
+        } else {
+            newButton.classList.remove('visible');
+        }
+    });
+    
+    // בדוק את מצב הדף בטעינה
+    if (window.scrollY > 200) {
+        newButton.classList.add('visible');
+    }
+    
+    console.log('כפתור חזרה למעלה נוצר מחדש');
+});
 </script>
-</html>
+</body>
+   </html>
