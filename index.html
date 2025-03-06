@@ -618,24 +618,24 @@ body:not(.dark-mode) .back-to-top.visible {
 
         /* תוספת: כפתור חזרה למעלה */
         .back-to-top {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 999;
-        }
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #FF5722; /* צבע בולט לבדיקה */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 9999; /* ערך גבוה יותר */
+}
 
         .back-to-top.visible {
             opacity: 1;
