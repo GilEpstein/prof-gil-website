@@ -500,6 +500,18 @@ body:not(.dark-mode) .whatsapp-btn {
     background-color: #25D366;  /* צבע וואטסאפ סטנדרטי */
     color: white;
 }
+/* תיקון לכפתור חזרה למעלה */
+body:not(.dark-mode) .back-to-top {
+    background-color: var(--accent-color);
+    color: white;
+    opacity: 0;  /* מתחיל כשקוף */
+    visibility: hidden;
+}
+
+body:not(.dark-mode) .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
 /* וכל ההגדרות הנוספות שנתתי... */
         footer {
             background-color: var(--primary-color);
