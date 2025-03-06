@@ -617,14 +617,14 @@ body:not(.dark-mode) .back-to-top.visible {
         }
 
         /* תוספת: כפתור חזרה למעלה */
-        .back-to-top {
+      .back-to-top {
     position: fixed;
-    bottom: 90px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    background-color: #FF5722; /* צבע בולט לבדיקה */
+    background-color: var(--accent-color);
     color: white;
     display: flex;
     align-items: center;
@@ -633,20 +633,23 @@ body:not(.dark-mode) .back-to-top.visible {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 9999; /* ערך גבוה יותר */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 9999; /* ערך גבוה מאוד */
 }
 
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
 
-        .back-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        }
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
 
+.back-to-top i {
+    font-size: 20px; /* הגדלת החץ */
+}
         /* עדכון: סטטיסטיקות קטנות יותר בתחתית הדף */
       .stats-container {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -865,17 +868,17 @@ body:not(.dark-mode) .back-to-top.visible {
     </style>
 </head>
 <body class="animate-cards dark-mode">
+    <!-- כפתור חזרה למעלה -->
+    <div class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
     <!-- מתג מצב לילה -->
     <div class="theme-toggle" id="theme-toggle">
         <div class="theme-toggle-icon sun"><i class="fas fa-sun"></i></div>
         <div class="theme-toggle-icon moon"><i class="fas fa-moon"></i></div>
     </div>
 
-    <!-- כפתור חזרה למעלה -->
-    <div class="back-to-top" id="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-
+   
     <header>
         <div class="container">
             <div class="header-content">
@@ -1663,4 +1666,24 @@ document.addEventListener('DOMContentLoaded', function() {
         gtag('config', 'G-QWBYT3XB6Q');
     </script>
 </head>
+<script>
+// בדיקת תקינות הכפתור חזרה למעלה
+setTimeout(function() {
+    const btn = document.getElementById('back-to-top');
+    if (btn) {
+        console.log('כפתור חזרה למעלה נמצא בדף');
+        // גרום לכפתור להיות נראה זמנית לבדיקה
+        btn.style.opacity = '1';
+        btn.style.visibility = 'visible';
+        
+        // החזר למצב הרגיל אחרי 3 שניות
+        setTimeout(function() {
+            btn.style.opacity = '';
+            btn.style.visibility = '';
+        }, 3000);
+    } else {
+        console.error('כפתור חזרה למעלה לא נמצא!');
+    }
+}, 2000);
+</script>
 </html>
