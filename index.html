@@ -865,6 +865,15 @@ body:not(.dark-mode) .back-to-top.visible {
                 height: 35px;
             }
         }
+        /* הסתרת כותרת כפולה בעמוד פוסט */
+.post-header-title, .page-title, h1.post-title {
+  display: none !important;
+}
+
+/* משאיר רק את הכותרת בתוך הכרטיס */
+.card-title {
+  display: block !important;
+}
     </style>
 </head>
 <body class="animate-cards dark-mode">
