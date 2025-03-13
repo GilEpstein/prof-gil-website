@@ -874,6 +874,66 @@ body:not(.dark-mode) .back-to-top.visible {
 .card-title {
   display: block !important;
 }
+/* סגנון לכפתור הצגת תמונה מלאה */
+.view-post-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.view-post-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* סגנון לחלון התמונה המוגדלת */
+.image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+}
+
+.full-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border: 3px solid white;
+    border-radius: 5px;
+}
+
+.close-modal {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
     </style>
 </head>
 <body class="animate-cards dark-mode">
@@ -1403,40 +1463,50 @@ document.addEventListener('DOMContentLoaded', function() {
         // הפעלה ראשונית של בדיקת נראות הקלפים
         setTimeout(checkCardVisibility, 100);
 
-        // Function to create a card element with share buttons
-        function createCard(item, type) {
-            // Create unique ID for the card based on title
-            const cardId = `card-${type}-${item.title.replace(/\s+/g, '-').toLowerCase()}`;
-            
-            return `
-                <div class="card" id="${cardId}">
-                    <img src="${item.image}" alt="${item.title}" class="card-img">
-                    <div class="share-buttons">
-                        <button class="share-button facebook" onclick="shareOnFacebook('${cardId}', '${item.link}')">
-                            <i class="fab fa-facebook-f"></i>
-                        </button>
-                        <button class="share-button twitter" onclick="shareOnTwitter('${cardId}', '${item.link}')">
-                            <i class="fab fa-twitter"></i>
-                        </button>
-                        <button class="share-button whatsapp" onclick="shareOnWhatsApp('${cardId}', '${item.link}')">
-                            <i class="fab fa-whatsapp"></i>
-                        </button>
-                        <button class="share-button copy" onclick="copyLink('${cardId}', '${item.link}')">
-                            <i class="fas fa-link"></i>
-                        </button>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">${item.title}</h3>
-                        <p class="card-date">${item.date}</p>
-                        <p class="card-desc">${item.description}</p>
-                        <a href="${item.link}" class="card-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-arrow-left"></i>
-                            קרא עוד
-                        </a>
-                    </div>
-                </div>
-            `;
-        }
+      // Function to create a card element with share buttons
+function createCard(item, type) {
+    // Create unique ID for the card based on title
+    const cardId = `card-${type}-${item.title.replace(/\s+/g, '-').toLowerCase()}`;
+    
+    // בדיקה האם מדובר בפוסט (שצריך להציג תמונה במקום קישור)
+    const isPost = type === 'posts';
+    
+    // תוכן הקישור - שונה בין פוסטים לתוכן אחר
+    const linkContent = isPost ? 
+        `<div class="view-post-btn">הצג תמונה מלאה</div>` : 
+        `<i class="fas fa-arrow-left"></i> קרא עוד`;
+    
+    return `
+        <div class="card" id="${cardId}">
+            <img src="${item.image}" alt="${item.title}" class="card-img">
+            <div class="share-buttons">
+                <button class="share-button facebook" onclick="shareOnFacebook('${cardId}', '${item.link}')">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+                <button class="share-button twitter" onclick="shareOnTwitter('${cardId}', '${item.link}')">
+                    <i class="fab fa-twitter"></i>
+                </button>
+                <button class="share-button whatsapp" onclick="shareOnWhatsApp('${cardId}', '${item.link}')">
+                    <i class="fab fa-whatsapp"></i>
+                </button>
+                <button class="share-button copy" onclick="copyLink('${cardId}', '${item.link}')">
+                    <i class="fas fa-link"></i>
+                </button>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">${item.title}</h3>
+                <p class="card-date">${item.date}</p>
+                <p class="card-desc">${item.description}</p>
+                <a href="${item.link}" class="card-link" target="${isPost ? '_self' : '_blank'}" 
+                   rel="${isPost ? '' : 'noopener noreferrer'}" 
+                   data-is-post="${isPost}" 
+                   data-post-image="${isPost ? item.image : ''}">
+                    ${linkContent}
+                </a>
+            </div>
+        </div>
+    `;
+}
         // פונקציות שיתוף
         function shareOnFacebook(cardId, link) {
             const card = document.getElementById(cardId);
@@ -1835,6 +1905,51 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     console.log('כפתור חזרה למעלה נוצר מחדש');
+});
+</script>
+<!-- חלון מודל להצגת תמונה מלאה -->
+<div class="image-modal">
+    <div class="modal-content">
+        <button class="close-modal">&times;</button>
+        <img src="" alt="תמונה מלאה" class="full-image">
+    </div>
+</div>
+
+<script>
+// קוד לטיפול בתמונות פוסטים
+document.addEventListener('DOMContentLoaded', function() {
+    // מאזין אירועי לחיצה על קישורים בקלפים
+    document.addEventListener('click', function(event) {
+        // בדיקה אם הלחיצה הייתה על קישור בכרטיס או על הכפתור עצמו
+        const link = event.target.closest('.card-link');
+        if (link) {
+            const isPost = link.getAttribute('data-is-post') === 'true';
+            
+            // אם זה פוסט, נציג את התמונה המוגדלת
+            if (isPost) {
+                event.preventDefault(); // מניעת מעבר לקישור
+                
+                const postImage = link.getAttribute('data-post-image');
+                const fullImage = document.querySelector('.full-image');
+                fullImage.src = postImage;
+                
+                // הצגת המודל
+                document.querySelector('.image-modal').classList.add('active');
+            }
+        }
+    });
+
+    // סגירת המודל בלחיצה על כפתור הסגירה
+    document.querySelector('.close-modal').addEventListener('click', function() {
+        document.querySelector('.image-modal').classList.remove('active');
+    });
+
+    // סגירת המודל בלחיצה מחוץ לתמונה
+    document.querySelector('.image-modal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            this.classList.remove('active');
+        }
+    });
 });
 </script>
 </body>
