@@ -740,30 +740,6 @@ body:not(.dark-mode) .back-to-top.visible {
 .dark-mode .theme-toggle-icon.moon {
     color: #f8fafc;
 }
-/* אינדיקטור נקודות מתחת ללשוניות */
-.dots-indicator {
-    display: flex;
-    justify-content: center;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--dark-secondary-text);
-    margin: 0 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0.5;
-}
-
-.dot.active {
-    background-color: var(--accent-color);
-    opacity: 1;
-    transform: scale(1.2);
-}
         /* Admin Controls */
         .admin-controls {
             position: fixed;
@@ -808,39 +784,33 @@ body:not(.dark-mode) .back-to-top.visible {
         }
 
         /* Responsive design improvements */
-       @media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-    }
-    
-    .profile-pic {
-        width: 170px;
-        height: 170px;
-    }
-    
-    .cards-grid {
-        grid-template-columns: 1fr;
-    }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-pic {
+                width: 170px;
+                height: 170px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
 
-    .tab-container {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding-bottom: 10px;
-        padding-right: 10px;
-        margin-bottom: 0;
-        justify-content: flex-start;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Firefox */
-        position: relative;
-    }
+            .tab-container {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                margin-bottom: 0;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+            }
 
-    .tab-container::-webkit-scrollbar {
-        display: none; /* Chrome, Safari and Opera */
-    }
-    
-    .scroll-indicator {
-        display: flex;
-    }
+            .tab-container::-webkit-scrollbar {
+                display: none; /* Chrome, Safari and Opera */
+            }
 
             .tab {
                 flex-shrink: 0;
@@ -944,72 +914,63 @@ body:not(.dark-mode) .back-to-top.visible {
             עודכן לאחרונה: <span id="update-date">4 במרץ, 2025</span>
         </div>
 
-     <div class="tab-container">
-    <div class="tab active" data-target="apps">
-        <i class="fas fa-mobile-alt"></i>
-        אפליקציות
-    </div>
-    <div class="tab" data-target="posts">
-        <i class="far fa-comment-dots"></i>
-        פוסטים חשובים
-    </div>
-    <div class="tab" data-target="podcasts">
-        <i class="fas fa-podcast"></i>
-        פודקאסטים
-    </div>
-    <div class="tab" data-target="articles">
-        <i class="far fa-newspaper"></i>
-        כתבות בעיתונים
-    </div>
-    <div class="tab" data-target="tv">
-        <i class="fas fa-tv"></i>
-        הופעות בטלוויזיה ורדיו
-    </div>
-</div>
+        <div class="tab-container">
+            <div class="tab active" data-target="podcasts">
+                <i class="fas fa-podcast"></i>
+                פודקאסטים
+            </div>
+            <div class="tab" data-target="articles">
+                <i class="far fa-newspaper"></i>
+                כתבות בעיתונים
+            </div>
+            <div class="tab" data-target="tv">
+                <i class="fas fa-tv"></i>
+                הופעות בטלוויזיה ורדיו
+            </div>
+            <div class="tab" data-target="apps">
+                <i class="fas fa-mobile-alt"></i>
+                אפליקציות
+            </div>
+            <div class="tab" data-target="posts">
+                <i class="far fa-comment-dots"></i>
+                פוסטים חשובים
+            </div>
+        </div>
 
-<!-- אינדיקטור ניווט -->
-<div class="dots-indicator">
-    <span class="dot active" data-index="0"></span>
-    <span class="dot" data-index="1"></span>
-    <span class="dot" data-index="2"></span>
-    <span class="dot" data-index="3"></span>
-    <span class="dot" data-index="4"></span>
-</div>
+        <section id="podcasts" class="content-section active">
+            <h2>פודקאסטים</h2>
+            <div class="cards-grid" id="podcasts-container">
+                <!-- Cards will be added dynamically via JavaScript -->
+            </div>
+        </section>
 
-        <section id="apps" class="content-section active">
-    <h2>אפליקציות</h2>
-    <div class="cards-grid" id="apps-container">
-        <!-- Cards will be added dynamically via JavaScript -->
-    </div>
-</section>
+        <section id="articles" class="content-section">
+            <h2>כתבות בעיתונים</h2>
+            <div class="cards-grid" id="articles-container">
+                <!-- Cards will be added dynamically via JavaScript -->
+            </div>
+        </section>
 
-<section id="posts" class="content-section">
-    <h2>פוסטים חשובים</h2>
-    <div class="cards-grid" id="posts-container">
-        <!-- Cards will be added dynamically via JavaScript -->
-    </div>
-</section>
+        <section id="tv" class="content-section">
+            <h2>הופעות בטלוויזיה ורדיו</h2>
+            <div class="cards-grid" id="tv-container">
+                <!-- Cards will be added dynamically via JavaScript -->
+            </div>
+        </section>
 
-<section id="podcasts" class="content-section">
-    <h2>פודקאסטים</h2>
-    <div class="cards-grid" id="podcasts-container">
-        <!-- Cards will be added dynamically via JavaScript -->
-    </div>
-</section>
+        <section id="apps" class="content-section">
+            <h2>אפליקציות</h2>
+            <div class="cards-grid" id="apps-container">
+                <!-- Cards will be added dynamically via JavaScript -->
+            </div>
+        </section>
 
-<section id="articles" class="content-section">
-    <h2>כתבות בעיתונים</h2>
-    <div class="cards-grid" id="articles-container">
-        <!-- Cards will be added dynamically via JavaScript -->
-    </div>
-</section>
-
-<section id="tv" class="content-section">
-    <h2>הופעות בטלוויזיה ורדיו</h2>
-    <div class="cards-grid" id="tv-container">
-        <!-- Cards will be added dynamically via JavaScript -->
-    </div>
-</section>
+        <section id="posts" class="content-section">
+            <h2>פוסטים חשובים</h2>
+            <div class="cards-grid" id="posts-container">
+                <!-- Cards will be added dynamically via JavaScript -->
+            </div>
+        </section>
         
         <!-- סטטיסטיקות - הועברו לתחתית הדף וקטנו -->
         <div class="container">
@@ -1353,53 +1314,13 @@ body:not(.dark-mode) .back-to-top.visible {
                 }
             ]
         };
-// עדכון תאריך עדכון אחרון - מעדכן אוטומטית לתאריך היום
-document.addEventListener('DOMContentLoaded', function() {
-    const today = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = today.toLocaleDateString('he-IL', options);
-    document.getElementById('update-date').textContent = formattedDate;
-    
-    // התקנת האזנות לנקודות ניווט
-    setupDotsNavigation();
-    
-    // עדכון הנקודה הפעילה בטעינה
-    updateActiveTab();
-});
-        
-        // פונקציה לעדכון הנקודה הפעילה
-function updateActiveTab() {
-    // מצא את כל הלשוניות
-    const tabs = document.querySelectorAll('.tab');
-    const dots = document.querySelectorAll('.dot');
-    
-    // עבור על כל הלשוניות ובדוק איזו פעילה
-    tabs.forEach((tab, index) => {
-        if (tab.classList.contains('active')) {
-            // הסר את הקלאס 'active' מכל הנקודות
-            dots.forEach(dot => dot.classList.remove('active'));
-            // הוסף את הקלאס 'active' לנקודה המתאימה
-            if (dots[index]) {
-                dots[index].classList.add('active');
-            }
-        }
-    });
-}
-
-// פונקציה להוספת האזנות לנקודות
-function setupDotsNavigation() {
-    const dots = document.querySelectorAll('.dot');
-    const tabs = document.querySelectorAll('.tab');
-    
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            // מצא את הלשונית המתאימה ולחץ עליה
-            if (tabs[index]) {
-                tabs[index].click();
-            }
+        // עדכון תאריך עדכון אחרון - מעדכן אוטומטית לתאריך היום
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = today.toLocaleDateString('he-IL', options);
+            document.getElementById('update-date').textContent = formattedDate;
         });
-    });
-}
 
         // Set WhatsApp group link
         document.getElementById('whatsapp-group').href = contentData.whatsappLink;
@@ -1867,34 +1788,7 @@ document.addEventListener('DOMContentLoaded', function() {
             resultMessage.style.padding = '10px';
             resultMessage.style.borderRadius = '4px';
         }
-// קוד לעדכון האינדיקטור של הנקודות
-const tabs = document.querySelectorAll('.tab');
-const contentSections = document.querySelectorAll('.content-section');
-const dots = document.querySelectorAll('.dot');
 
-// הוסף אירוע click לכל לשונית
-tabs.forEach((tab, tabIndex) => {
-    tab.addEventListener('click', function() {
-        // עדכן את הנקודה הפעילה
-        dots.forEach((dot, dotIndex) => {
-            // הסר את הקלאס 'active' מכל הנקודות
-            dot.classList.remove('active');
-            
-            // הוסף את הקלאס 'active' לנקודה המתאימה
-            if (tabIndex === dotIndex) {
-                dot.classList.add('active');
-            }
-        });
-    });
-});
-
-// הוסף אירוע click לכל נקודה
-dots.forEach((dot, dotIndex) => {
-    dot.addEventListener('click', function() {
-        // הפעל את הלשונית המתאימה
-        tabs[dotIndex].click();
-    });
-});
        
     </script>
     <script>
