@@ -740,6 +740,23 @@ body:not(.dark-mode) .back-to-top.visible {
 .dark-mode .theme-toggle-icon.moon {
     color: #f8fafc;
 }
+/* אינדיקטור גלילה לכפתורים */
+.scroll-indicator {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    color: var(--dark-secondary-text);
+    font-size: 1.2rem;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(to left, var(--light-bg) 60%, transparent);
+    width: 40px;
+    text-align: center;
+    pointer-events: none;
+}
         /* Admin Controls */
         .admin-controls {
             position: fixed;
@@ -784,33 +801,39 @@ body:not(.dark-mode) .back-to-top.visible {
         }
 
         /* Responsive design improvements */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .profile-pic {
-                width: 170px;
-                height: 170px;
-            }
-            
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
+       @media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .profile-pic {
+        width: 170px;
+        height: 170px;
+    }
+    
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
 
-            .tab-container {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                padding-bottom: 10px;
-                margin-bottom: 0;
-                justify-content: flex-start;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none; /* Firefox */
-            }
+    .tab-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        padding-right: 10px;
+        margin-bottom: 0;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        position: relative;
+    }
 
-            .tab-container::-webkit-scrollbar {
-                display: none; /* Chrome, Safari and Opera */
-            }
+    .tab-container::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
+    }
+    
+    .scroll-indicator {
+        display: flex;
+    }
 
             .tab {
                 flex-shrink: 0;
@@ -914,63 +937,66 @@ body:not(.dark-mode) .back-to-top.visible {
             עודכן לאחרונה: <span id="update-date">4 במרץ, 2025</span>
         </div>
 
-        <div class="tab-container">
-            <div class="tab active" data-target="podcasts">
-                <i class="fas fa-podcast"></i>
-                פודקאסטים
-            </div>
-            <div class="tab" data-target="articles">
-                <i class="far fa-newspaper"></i>
-                כתבות בעיתונים
-            </div>
-            <div class="tab" data-target="tv">
-                <i class="fas fa-tv"></i>
-                הופעות בטלוויזיה ורדיו
-            </div>
-            <div class="tab" data-target="apps">
-                <i class="fas fa-mobile-alt"></i>
-                אפליקציות
-            </div>
-            <div class="tab" data-target="posts">
-                <i class="far fa-comment-dots"></i>
-                פוסטים חשובים
-            </div>
-        </div>
+      <div class="tab-container">
+    <div class="tab active" data-target="apps">
+        <i class="fas fa-mobile-alt"></i>
+        אפליקציות
+    </div>
+    <div class="tab" data-target="posts">
+        <i class="far fa-comment-dots"></i>
+        פוסטים חשובים
+    </div>
+    <div class="tab" data-target="podcasts">
+        <i class="fas fa-podcast"></i>
+        פודקאסטים
+    </div>
+    <div class="tab" data-target="articles">
+        <i class="far fa-newspaper"></i>
+        כתבות בעיתונים
+    </div>
+    <div class="tab" data-target="tv">
+        <i class="fas fa-tv"></i>
+        הופעות בטלוויזיה ורדיו
+    </div>
+    <div class="scroll-indicator">
+        <i class="fas fa-ellipsis-h"></i>
+    </div>
+</div>
 
-        <section id="podcasts" class="content-section active">
-            <h2>פודקאסטים</h2>
-            <div class="cards-grid" id="podcasts-container">
-                <!-- Cards will be added dynamically via JavaScript -->
-            </div>
-        </section>
+        <section id="apps" class="content-section active">
+    <h2>אפליקציות</h2>
+    <div class="cards-grid" id="apps-container">
+        <!-- Cards will be added dynamically via JavaScript -->
+    </div>
+</section>
 
-        <section id="articles" class="content-section">
-            <h2>כתבות בעיתונים</h2>
-            <div class="cards-grid" id="articles-container">
-                <!-- Cards will be added dynamically via JavaScript -->
-            </div>
-        </section>
+<section id="posts" class="content-section">
+    <h2>פוסטים חשובים</h2>
+    <div class="cards-grid" id="posts-container">
+        <!-- Cards will be added dynamically via JavaScript -->
+    </div>
+</section>
 
-        <section id="tv" class="content-section">
-            <h2>הופעות בטלוויזיה ורדיו</h2>
-            <div class="cards-grid" id="tv-container">
-                <!-- Cards will be added dynamically via JavaScript -->
-            </div>
-        </section>
+<section id="podcasts" class="content-section">
+    <h2>פודקאסטים</h2>
+    <div class="cards-grid" id="podcasts-container">
+        <!-- Cards will be added dynamically via JavaScript -->
+    </div>
+</section>
 
-        <section id="apps" class="content-section">
-            <h2>אפליקציות</h2>
-            <div class="cards-grid" id="apps-container">
-                <!-- Cards will be added dynamically via JavaScript -->
-            </div>
-        </section>
+<section id="articles" class="content-section">
+    <h2>כתבות בעיתונים</h2>
+    <div class="cards-grid" id="articles-container">
+        <!-- Cards will be added dynamically via JavaScript -->
+    </div>
+</section>
 
-        <section id="posts" class="content-section">
-            <h2>פוסטים חשובים</h2>
-            <div class="cards-grid" id="posts-container">
-                <!-- Cards will be added dynamically via JavaScript -->
-            </div>
-        </section>
+<section id="tv" class="content-section">
+    <h2>הופעות בטלוויזיה ורדיו</h2>
+    <div class="cards-grid" id="tv-container">
+        <!-- Cards will be added dynamically via JavaScript -->
+    </div>
+</section>
         
         <!-- סטטיסטיקות - הועברו לתחתית הדף וקטנו -->
         <div class="container">
@@ -1314,13 +1340,44 @@ body:not(.dark-mode) .back-to-top.visible {
                 }
             ]
         };
-        // עדכון תאריך עדכון אחרון - מעדכן אוטומטית לתאריך היום
+// עדכון תאריך עדכון אחרון - מעדכן אוטומטית לתאריך היום
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             const formattedDate = today.toLocaleDateString('he-IL', options);
             document.getElementById('update-date').textContent = formattedDate;
+            
+            // בדיקה אם יש צורך באינדיקטור גלילה
+            checkScrollIndicator();
+            
+            // הוספת האזנה לאירוע שינוי גודל החלון
+            window.addEventListener('resize', checkScrollIndicator);
+            
+            // הוספת האזנה לאירוע גלילה בתפריט
+            const tabContainer = document.querySelector('.tab-container');
+            tabContainer.addEventListener('scroll', checkScrollIndicator);
         });
+        
+        // פונקציה לבדיקה האם להציג את אינדיקטור הגלילה
+        function checkScrollIndicator() {
+            const tabContainer = document.querySelector('.tab-container');
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            
+            if (tabContainer && scrollIndicator) {
+                // בדיקה אם יש תוכן שלא נראה בגלילה
+                const hasHiddenContent = tabContainer.scrollWidth > tabContainer.clientWidth;
+                
+                // בדיקה אם נמצאים בקצה הימני של הגלילה
+                const isScrolledToEnd = Math.abs(tabContainer.scrollWidth - tabContainer.clientWidth - tabContainer.scrollLeft) < 10;
+                
+                // הצג/הסתר את האינדיקטור בהתאם
+                if (hasHiddenContent && !isScrolledToEnd) {
+                    scrollIndicator.style.display = 'flex';
+                } else {
+                    scrollIndicator.style.display = 'none';
+                }
+            }
+        }
 
         // Set WhatsApp group link
         document.getElementById('whatsapp-group').href = contentData.whatsappLink;
