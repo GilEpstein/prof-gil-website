@@ -1867,7 +1867,34 @@ document.addEventListener('DOMContentLoaded', function() {
             resultMessage.style.padding = '10px';
             resultMessage.style.borderRadius = '4px';
         }
+// קוד לעדכון האינדיקטור של הנקודות
+const tabs = document.querySelectorAll('.tab');
+const contentSections = document.querySelectorAll('.content-section');
+const dots = document.querySelectorAll('.dot');
 
+// הוסף אירוע click לכל לשונית
+tabs.forEach((tab, tabIndex) => {
+    tab.addEventListener('click', function() {
+        // עדכן את הנקודה הפעילה
+        dots.forEach((dot, dotIndex) => {
+            // הסר את הקלאס 'active' מכל הנקודות
+            dot.classList.remove('active');
+            
+            // הוסף את הקלאס 'active' לנקודה המתאימה
+            if (tabIndex === dotIndex) {
+                dot.classList.add('active');
+            }
+        });
+    });
+});
+
+// הוסף אירוע click לכל נקודה
+dots.forEach((dot, dotIndex) => {
+    dot.addEventListener('click', function() {
+        // הפעל את הלשונית המתאימה
+        tabs[dotIndex].click();
+    });
+});
        
     </script>
     <script>
