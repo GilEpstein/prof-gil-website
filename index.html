@@ -740,22 +740,29 @@ body:not(.dark-mode) .back-to-top.visible {
 .dark-mode .theme-toggle-icon.moon {
     color: #f8fafc;
 }
-/* אינדיקטור גלילה לכפתורים */
-.scroll-indicator {
-    display: none;
-    align-items: center;
+/* אינדיקטור נקודות מתחת ללשוניות */
+.dots-indicator {
+    display: flex;
     justify-content: center;
-    padding: 0.5rem;
-    color: var(--dark-secondary-text);
-    font-size: 1.2rem;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: linear-gradient(to left, var(--light-bg) 60%, transparent);
-    width: 40px;
-    text-align: center;
-    pointer-events: none;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--dark-secondary-text);
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+}
+
+.dot.active {
+    background-color: var(--accent-color);
+    opacity: 1;
+    transform: scale(1.2);
 }
         /* Admin Controls */
         .admin-controls {
@@ -937,7 +944,7 @@ body:not(.dark-mode) .back-to-top.visible {
             עודכן לאחרונה: <span id="update-date">4 במרץ, 2025</span>
         </div>
 
-      <div class="tab-container">
+     <div class="tab-container">
     <div class="tab active" data-target="apps">
         <i class="fas fa-mobile-alt"></i>
         אפליקציות
@@ -958,9 +965,15 @@ body:not(.dark-mode) .back-to-top.visible {
         <i class="fas fa-tv"></i>
         הופעות בטלוויזיה ורדיו
     </div>
-    <div class="scroll-indicator">
-        <i class="fas fa-ellipsis-h"></i>
-    </div>
+</div>
+
+<!-- אינדיקטור ניווט -->
+<div class="dots-indicator">
+    <span class="dot active" data-index="0"></span>
+    <span class="dot" data-index="1"></span>
+    <span class="dot" data-index="2"></span>
+    <span class="dot" data-index="3"></span>
+    <span class="dot" data-index="4"></span>
 </div>
 
         <section id="apps" class="content-section active">
@@ -1341,43 +1354,52 @@ body:not(.dark-mode) .back-to-top.visible {
             ]
         };
 // עדכון תאריך עדכון אחרון - מעדכן אוטומטית לתאריך היום
-        document.addEventListener('DOMContentLoaded', function() {
-            const today = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedDate = today.toLocaleDateString('he-IL', options);
-            document.getElementById('update-date').textContent = formattedDate;
-            
-            // בדיקה אם יש צורך באינדיקטור גלילה
-            checkScrollIndicator();
-            
-            // הוספת האזנה לאירוע שינוי גודל החלון
-            window.addEventListener('resize', checkScrollIndicator);
-            
-            // הוספת האזנה לאירוע גלילה בתפריט
-            const tabContainer = document.querySelector('.tab-container');
-            tabContainer.addEventListener('scroll', checkScrollIndicator);
-        });
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = today.toLocaleDateString('he-IL', options);
+    document.getElementById('update-date').textContent = formattedDate;
+    
+    // התקנת האזנות לנקודות ניווט
+    setupDotsNavigation();
+    
+    // עדכון הנקודה הפעילה בטעינה
+    updateActiveTab();
+});
         
-        // פונקציה לבדיקה האם להציג את אינדיקטור הגלילה
-        function checkScrollIndicator() {
-            const tabContainer = document.querySelector('.tab-container');
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            
-            if (tabContainer && scrollIndicator) {
-                // בדיקה אם יש תוכן שלא נראה בגלילה
-                const hasHiddenContent = tabContainer.scrollWidth > tabContainer.clientWidth;
-                
-                // בדיקה אם נמצאים בקצה הימני של הגלילה
-                const isScrolledToEnd = Math.abs(tabContainer.scrollWidth - tabContainer.clientWidth - tabContainer.scrollLeft) < 10;
-                
-                // הצג/הסתר את האינדיקטור בהתאם
-                if (hasHiddenContent && !isScrolledToEnd) {
-                    scrollIndicator.style.display = 'flex';
-                } else {
-                    scrollIndicator.style.display = 'none';
-                }
+        // פונקציה לעדכון הנקודה הפעילה
+function updateActiveTab() {
+    // מצא את כל הלשוניות
+    const tabs = document.querySelectorAll('.tab');
+    const dots = document.querySelectorAll('.dot');
+    
+    // עבור על כל הלשוניות ובדוק איזו פעילה
+    tabs.forEach((tab, index) => {
+        if (tab.classList.contains('active')) {
+            // הסר את הקלאס 'active' מכל הנקודות
+            dots.forEach(dot => dot.classList.remove('active'));
+            // הוסף את הקלאס 'active' לנקודה המתאימה
+            if (dots[index]) {
+                dots[index].classList.add('active');
             }
         }
+    });
+}
+
+// פונקציה להוספת האזנות לנקודות
+function setupDotsNavigation() {
+    const dots = document.querySelectorAll('.dot');
+    const tabs = document.querySelectorAll('.tab');
+    
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            // מצא את הלשונית המתאימה ולחץ עליה
+            if (tabs[index]) {
+                tabs[index].click();
+            }
+        });
+    });
+}
 
         // Set WhatsApp group link
         document.getElementById('whatsapp-group').href = contentData.whatsappLink;
