@@ -9,6 +9,8 @@
       gtag('js', new Date());
     
       gtag('config', 'G-C5YE01DV10');
+
+        
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -942,6 +944,119 @@ body:not(.dark-mode) .back-to-top.visible {
     cursor: pointer;
     background: none;
     border: none;
+}
+/* סגנון גילוי נאות */
+.disclaimer-container {
+    background-color: rgba(10, 50, 78, 0.95);
+    margin: 0rem auto 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    max-width: 1200px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+body:not(.dark-mode) .disclaimer-container {
+    background-color: rgba(226, 232, 240, 0.95);
+}
+
+.disclaimer-content {
+    padding: 0.5rem 1rem;
+}
+
+.disclaimer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 0.5rem 0;
+}
+
+.disclaimer-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--light-text);
+    margin-right: 0.5rem;
+}
+
+body:not(.dark-mode) .disclaimer-header h3 {
+    color: var(--primary-color);
+}
+
+.disclaimer-header i {
+    color: #fcd34d;
+    font-size: 1.2rem;
+}
+
+body:not(.dark-mode) .disclaimer-header i {
+    color: #eab308;
+}
+
+.disclaimer-toggle {
+    background: none;
+    border: none;
+    color: var(--light-text);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+body:not(.dark-mode) .disclaimer-toggle {
+    color: var(--primary-color);
+}
+
+.disclaimer-toggle.collapsed i {
+    transform: rotate(180deg);
+}
+
+.disclaimer-body {
+    max-height: 1000px;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.disclaimer-body.collapsed {
+    max-height: 0;
+}
+
+.disclaimer-list {
+    padding-right: 1.5rem;
+    margin: 0.5rem 0;
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+body:not(.dark-mode) .disclaimer-list {
+    color: var(--primary-color);
+}
+
+.disclaimer-list li {
+    margin-bottom: 0.25rem;
+}
+
+.disclaimer-list li strong {
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .disclaimer-container {
+        margin: 0.5rem 1rem 1rem;
+        border-radius: 6px;
+    }
+    
+    .disclaimer-content {
+        padding: 0.5rem;
+    }
+    
+    .disclaimer-header h3 {
+        font-size: 1rem;
+    }
+    
+    .disclaimer-list {
+        font-size: 0.85rem;
+        padding-right: 1.25rem;
+    }
 }
     </style>
 </head>
@@ -1918,7 +2033,38 @@ function createCard(item, type) {
             resultMessage.style.padding = '10px';
             resultMessage.style.borderRadius = '4px';
         }
-
+// קוד לגילוי נאות מתקפל
+document.addEventListener('DOMContentLoaded', function() {
+    const disclaimerToggle = document.getElementById('disclaimer-toggle');
+    const disclaimerBody = document.getElementById('disclaimer-body');
+    const disclaimerHeader = document.querySelector('.disclaimer-header');
+    
+    // בדיקה אם המשתמש כבר הסתיר את הגילוי הנאות
+    const isCollapsed = localStorage.getItem('disclaimerCollapsed') === 'true';
+    
+    if (isCollapsed) {
+        disclaimerBody.classList.add('collapsed');
+        disclaimerToggle.classList.add('collapsed');
+    }
+    
+    // הוספת מאזין אירועים לכפתור
+    function toggleDisclaimer() {
+        disclaimerBody.classList.toggle('collapsed');
+        disclaimerToggle.classList.toggle('collapsed');
+        
+        // שמירת ההעדפה
+        localStorage.setItem('disclaimerCollapsed', disclaimerBody.classList.contains('collapsed'));
+    }
+    
+    disclaimerToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleDisclaimer();
+    });
+    
+    disclaimerHeader.addEventListener('click', function() {
+        toggleDisclaimer();
+    });
+});
        
     </script>
     <script>
