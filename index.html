@@ -14,738 +14,869 @@
     <title>@פרופ' גיל - מגלים את שוק ההון</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <style>
-      :root {
-          /* New color scheme based on the image */
-          --primary-color: #0d3b56;
-          --secondary-color: #1d9e74;
-          --accent-color: #34a7e0;
-          --light-bg: #0c4566;
-          --dark-text: #ffffff;
-          --light-text: #f8fafc;
-          --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-          /* Dark mode variables */
-          --dark-bg: #04263c;
-          --dark-secondary-bg: #0a324e;
-          --dark-secondary-text: #a8c5d6;
-      }
-      /* Additional changes needed for the new color scheme */
-      body {
-          background-color: var(--light-bg);
-          color: var(--dark-text);
-      }
-      .card {
-          background-color: var(--dark-secondary-bg);
-          color: var(--light-text);
-      }
-      .card-date {
-          color: var(--dark-secondary-text);
-      }
-      .tab {
-          background-color: var(--dark-secondary-bg);
-          color: var(--light-text);
-      }
-      .search-input {
-          background-color: var(--dark-secondary-bg);
-          color: var(--light-text);
-      }
-      .share-buttons {
-          background-color: rgba(10, 50, 78, 0.8);
-      }
-      .share-button {
-          background-color: var(--dark-secondary-bg);
-          color: var(--light-text);
-      }
-      /* מצב לילה */
-      .dark-mode {
-          --light-bg: var(--dark-bg);
-          --dark-text: var(--light-text);
-          --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-          background-color: var(--dark-bg);
-          color: var(--light-text);
-      }
-      .dark-mode .card {
-          background-color: var(--dark-secondary-bg);
-          color: var(--light-text);
-      }
-      .dark-mode .card-date {
-          color: var(--dark-secondary-text);
-      }
-      .dark-mode .tab {
-          background-color: var(--dark-secondary-bg);
-          color: var(--light-text);
-      }
-      .dark-mode .card-link {
-          color: var(--secondary-color);
-      }
-      .dark-mode .social-link {
-          background-color: var(--dark-secondary-bg);
-          color: var(--light-text);
-      }
-      * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
-      body {
-          background-color: var(--light-bg);
-          color: var(--dark-text);
-          line-height: 1.6;
-          transition: background-color 0.3s, color 0.3s;
-      }
-      header {
-          background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
-          color: var(--light-text);
-          padding: 2rem 0;
-          text-align: center;
-          box-shadow: var(--card-shadow);
-          position: relative;
-      }
-      .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 1rem;
-      }
-      .header-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
-      .profile-pic {
-          width: 200px;
-          height: 200px;
-          border-radius: 50%;
-          border: 4px solid var(--light-text);
-          margin-bottom: 1rem;
-          object-fit: cover;
-          object-position: top;
-      }
-      h1 {
-          font-size: 2.5rem;
-          margin-bottom: 0.5rem;
-      }
-      .subtitle {
-          font-size: 1.2rem;
-          margin-bottom: 1rem;
-      }
-      .whatsapp-btn {
-          display: inline-flex;
-          align-items: center;
-          background-color: #25D366;
-          color: white;
-          padding: 0.75rem 1.5rem;
-          border-radius: 30px;
-          text-decoration: none;
-          font-weight: bold;
-          transition: all 0.3s ease;
-          margin-top: 1rem;
-          box-shadow: var(--card-shadow);
-      }
-      .whatsapp-btn i {
-          margin-left: 0.5rem;
-          font-size: 1.25rem;
-      }
-      .whatsapp-btn:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      }
-      /* חיפוש */
-      .search-container {
-          margin: 1.5rem auto;
-          max-width: 600px;
-          position: relative;
-      }
-      .search-input {
-          width: 100%;
-          padding: 12px 20px;
-          padding-right: 45px;
-          border: none;
-          border-radius: 30px;
-          box-shadow: var(--card-shadow);
-          font-size: 1rem;
-          outline: none;
-          transition: all 0.3s;
-          background-color: white;
-          color: var(--dark-text);
-      }
-      .dark-mode .search-input {
-          background-color: var(--dark-secondary-bg);
-          color: var(--light-text);
-      }
-      .search-input:focus {
-          box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
-      }
-      .search-icon {
-          position: absolute;
-          top: 50%;
-          right: 15px;
-          transform: translateY(-50%);
-          color: var(--primary-color);
-          font-size: 1.2rem;
-          pointer-events: none;
-      }
-      .search-results {
-          display: none;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          right: 0;
-          background: white;
-          border-radius: 10px;
-          box-shadow: var(--card-shadow);
-          margin-top: 10px;
-          z-index: 100;
-          max-height: 300px;
-          overflow-y: auto;
-      }
-      .dark-mode .search-results {
-          background-color: var(--dark-secondary-bg);
-      }
-      .search-result-item {
-          padding: 12px 15px;
-          border-bottom: 1px solid rgba(0,0,0,0.1);
-          cursor: pointer;
-          transition: background-color 0.2s;
-      }
-      .search-result-item:last-child {
-          border-bottom: none;
-      }
-      .search-result-item:hover {
-          background-color: rgba(0,0,0,0.05);
-      }
-      .dark-mode .search-result-item:hover {
-          background-color: rgba(255,255,255,0.1);
-      }
-      .search-result-title {
-          font-weight: bold;
-          margin-bottom: 4px;
-      }
-      .search-result-category {
-          font-size: 0.8rem;
-          color: #6b7280;
-          margin-bottom: 4px;
-      }
-      .dark-mode .search-result-category {
-          color: var(--dark-secondary-text);
-      }
-      .no-results {
-          padding: 15px;
-          text-align: center;
-          color: #6b7280;
-      }
-      .dark-mode .no-results {
-          color: var(--dark-secondary-text);
-      }
-      .tab-container {
-          display: flex;
-          justify-content: center;
-          margin: 2rem 0 1rem;
-          flex-wrap: wrap;
-      }
-      .tab {
-          padding: 1rem 1.5rem;
-          cursor: pointer;
-          border-radius: 30px;
-          margin: 0.5rem;
-          transition: all 0.3s ease;
-          font-weight: bold;
-          background-color: white;
-          box-shadow: var(--card-shadow);
-          display: flex;
-          align-items: center;
-      }
-      .tab i {
-          margin-left: 0.5rem;
-          font-size: 1.25rem;
-      }
-      .tab.active {
-          background-color: var(--accent-color);
-          color: var(--light-text);
-      }
-      .tab:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      }
-      .content-section {
-          display: none;
-          padding: 2rem 0;
-      }
-      .content-section.active {
-          display: block;
-          animation: fadeIn 0.5s;
-      }
-      @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-      }
-      /* אנימציות להופעת קלפים */
-      .animate-cards .card {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
-      }
-      .animate-cards .card.show {
-          opacity: 1;
-          transform: translateY(0);
-      }
-      .cards-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-          gap: 2rem;
-          margin-top: 2rem;
-      }
-      .card {
-          background-color: white;
-          border-radius: 10px;
-          overflow: hidden;
-          box-shadow: var(--card-shadow);
-          transition: all 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
-          position: relative;
-      }
-      .card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      }
-      .card-img {
-          width: 100%;
-          height: 180px;
-          object-fit: cover;
-      }
-      .card-content {
-          padding: 1.5rem;
-      }
-      .card-title {
-          font-size: 1.25rem;
-          font-weight: bold;
-          margin-bottom: 0.5rem;
-      }
-      .card-date {
-          color: #6b7280;
-          font-size: 0.9rem;
-          margin-bottom: 1rem;
-      }
-      .card-desc {
-          margin-bottom: 1.5rem;
-      }
-      .card-link {
-          display: inline-flex;
-          align-items: center;
-          color: var(--primary-color);
-          font-weight: bold;
-          text-decoration: none;
-          transition: all 0.3s ease;
-      }
-      .card-link i {
-          margin-right: 0.5rem;
-          transition: transform 0.3s ease;
-      }
-      .card-link:hover i {
-          transform: translateX(-5px);
-      }
-      /* תוספת: כפתורי שיתוף */
-      .share-buttons {
-          position: absolute;
-          top: 10px;
-          left: 10px;
-          background-color: rgba(255, 255, 255, 0.8);
-          border-radius: 20px;
-          padding: 5px 10px;
-          display: flex;
-          opacity: 0;
-          transition: opacity 0.3s;
-      }
-      .dark-mode .share-buttons {
-          background-color: rgba(30, 41, 59, 0.8);
-      }
-      .card:hover .share-buttons {
-          opacity: 1;
-      }
-      .share-button {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 3px;
-          background-color: white;
-          color: var(--primary-color);
-          border: none;
-          cursor: pointer;
-          transition: all 0.2s;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-          font-size: 0.9rem;
-      }
-      .dark-mode .share-button {
-          background-color: var(--dark-secondary-bg);
-          color: var(--light-text);
-      }
-      .share-button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      }
-      .share-button.facebook {
-          color: #1877f2;
-      }
-      .share-button.twitter {
-          color: #1da1f2;
-      }
-      .share-button.whatsapp {
-          color: #25d366;
-      }
-      .share-button.copy {
-          color: #6b7280;
-      }
-      .dark-mode .share-button.facebook, 
-      .dark-mode .share-button.twitter, 
-      .dark-mode .share-button.whatsapp {
-          color: var(--light-text);
-      }
-      .dark-mode .share-button.copy {
-          color: var(--dark-secondary-text);
-      }
-      /* מצב יום מותאם (לא מצב לילה) */
-      body:not(.dark-mode) {
-          background-color: #f0f9ff;
-          color: #0f172a;
-      }
-      body:not(.dark-mode) .card {
-          background-color: white;
-          color: #0f172a;
-      }
-      body:not(.dark-mode) .tab-container .tab {
-          background-color: #e6f0f9;
-          color: #0d3b56;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      }
-      body:not(.dark-mode) .tab-container .tab:hover {
-          background-color: #d0e7f7;
-      }
-      body:not(.dark-mode) .tab-container .tab.active {
-          background-color: var(--accent-color);
-          color: white;
-      }
-      body:not(.dark-mode) .whatsapp-btn {
-          background-color: #25D366;
-          color: white;
-      }
-      body:not(.dark-mode) .back-to-top {
-          background-color: var(--accent-color);
-          color: white;
-          opacity: 0;
-          visibility: hidden;
-      }
-      body:not(.dark-mode) .back-to-top.visible {
-          opacity: 1;
-          visibility: visible;
-      }
-      body:not(.dark-mode) .back-to-top:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-      }
-      .back-to-top i {
-          font-size: 20px;
-      }
-      /* סטטיסטיקות */
-      .stats-container {
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          color: white;
-          padding: 1.5rem 0;
-          margin-top: 2rem;
-          text-align: center;
-          border-radius: 8px;
-      }
-      .stats-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1rem;
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 0 1rem;
-      }
-      .stat-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
-      .stat-number {
-          font-size: 2rem;
-          font-weight: bold;
-          margin-bottom: 0.25rem;
-      }
-      .stat-label {
-          font-size: 1rem;
-      }
-      .last-update {
-          text-align: center;
-          font-size: 0.9rem;
-          color: #6b7280;
-          margin-top: 1rem;
-      }
-      .dark-mode .last-update {
-          color: var(--dark-secondary-text);
-      }
-      /* מתג מצב לילה */
-      .theme-toggle {
-          position: fixed;
-          top: 20px;
-          left: 20px;
-          background-color: white;
-          border-radius: 20px;
-          padding: 5px;
-          display: flex;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-          z-index: 999;
-          cursor: pointer;
-          transition: background-color 0.3s;
-      }
-      .dark-mode .theme-toggle {
-          background-color: var(--dark-secondary-bg);
-      }
-      .theme-toggle-icon {
-          width: 30px;
-          height: 30px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.2rem;
-      }
-      .theme-toggle-icon.sun {
-          color: #6b7280;
-      }
-      .theme-toggle-icon.moon {
-          color: #f59e0b;
-      }
-      .dark-mode .theme-toggle-icon.sun {
-          color: #6b7280;
-      }
-      .dark-mode .theme-toggle-icon.moon {
-          color: #f8fafc;
-      }
-      /* Admin Controls */
-      .admin-controls {
-          position: fixed;
-          bottom: 20px;
-          left: 20px;
-          display: flex;
-          align-items: center;
-          z-index: 999;
-      }
-      .visitor-counter {
-          background-color: var(--primary-color);
-          color: white;
-          padding: 5px 10px;
-          border-radius: 20px;
-          font-size: 0.8rem;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-          display: flex;
-          align-items: center;
-          margin-left: 10px;
-      }
-      .visitor-counter i {
-          margin-left: 5px;
-      }
-      #open-admin {
-          padding: 10px;
-          background-color: var(--primary-color);
-          color: white;
-          border: none;
-          border-radius: 50%;
-          width: 40px;
-          height: 40px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      }
-      /* Responsive design */
-      @media (max-width: 768px) {
-          h1 {
-              font-size: 2rem;
-          }
-          .profile-pic {
-              width: 170px;
-              height: 170px;
-          }
-          .cards-grid {
-              grid-template-columns: 1fr;
-          }
-          .tab-container {
-              flex-wrap: nowrap;
-              overflow-x: auto;
-              padding-bottom: 10px;
-              margin-bottom: 0;
-              justify-content: flex-start;
-              -webkit-overflow-scrolling: touch;
-              scrollbar-width: none;
-          }
-          .tab-container::-webkit-scrollbar {
-              display: none;
-          }
-          .tab {
-              flex-shrink: 0;
-              padding: 0.8rem 1.2rem;
-          }
-          .stats-grid {
-              grid-template-columns: repeat(3, 1fr);
-              gap: 1rem;
-          }
-          .stat-number {
-              font-size: 1.75rem;
-          }
-          .stat-label {
-              font-size: 0.9rem;
-          }
-          .search-container {
-              margin: 1rem auto;
-          }
-          .search-input {
-              padding: 10px 45px 10px 15px;
-              font-size: 0.9rem;
-          }
-      }
-      @media (max-width: 480px) {
-          .stats-grid {
-              grid-template-columns: repeat(3, 1fr);
-          }
-          .stat-number {
-              font-size: 1.5rem;
-          }
-          .stat-label {
-              font-size: 0.8rem;
-          }
-          .theme-toggle {
-              top: 10px;
-              left: 10px;
-          }
-          .back-to-top {
-              bottom: 80px;
-              right: 10px;
-              width: 35px;
-              height: 35px;
-          }
-      }
-      /* הסתרת כותרת כפולה בעמוד פוסט */
-      .post-header-title, .page-title, h1.post-title {
-        display: none !important;
-      }
-      /* משאיר רק את הכותרת בתוך הכרטיס */
-      .card-title {
-        display: block !important;
-      }
-      /* סגנון לכפתור הצגת תמונה מלאה */
-      .view-post-btn {
-          display: inline-block;
-          padding: 8px 16px;
-          background-color: var(--primary-color);
-          color: white;
-          border-radius: 20px;
-          font-weight: bold;
-          transition: all 0.3s;
-          cursor: pointer;
-      }
-      .view-post-btn:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      }
-      /* סגנון לחלון התמונה המוגדלת */
-      .image-modal {
-          display: none;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.8);
-          z-index: 1000;
-          justify-content: center;
-          align-items: center;
-      }
-      .image-modal.active {
-          display: flex;
-      }
-      .modal-content {
-          position: relative;
-          max-width: 90%;
-          max-height: 90%;
-          margin: auto;
-      }
-      .full-image {
-          max-width: 100%;
-          max-height: 90vh;
-          object-fit: contain;
-          border: 3px solid white;
-          border-radius: 5px;
-      }
-      .close-modal {
-          position: absolute;
-          top: -40px;
-          right: 0;
-          color: white;
-          font-size: 30px;
-          cursor: pointer;
-          background: none;
-          border: none;
-      }
-      /* סגנונות לאזהרת סיכון */
-      .risk-disclaimer-section {
-          padding: 2rem 0;
-          background-color: rgba(255, 255, 255, 0.9);
-          color: #0d3b56;
-          border-top: 3px solid var(--primary-color);
-          border-bottom: 3px solid var(--primary-color);
-          margin: 2rem 0;
-      }
-      .risk-disclaimer-section h2 {
-          font-size: 1.5rem;
-          margin-bottom: 1rem;
-          text-align: center;
-      }
-      .risk-disclaimer-section p {
-          font-size: 1rem;
-          line-height: 1.5;
-          text-align: center;
-          max-width: 800px;
-          margin: 0 auto;
-      }
-      footer {
-          background-color: var(--primary-color);
-          color: var(--light-text);
-          text-align: center;
-          padding: 2rem 0;
-          margin-top: 1rem;
-      }
-      .social-links {
-          display: flex;
-          justify-content: center;
-          margin: 1rem 0;
-      }
-      .social-link {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          background-color: var(--light-text);
-          color: var(--primary-color);
-          margin: 0 0.5rem;
-          text-decoration: none;
-          transition: all 0.3s ease;
-      }
-      .social-link:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      }
+        :root {
+            /* New color scheme based on the image */
+            --primary-color: #0d3b56;       /* Darker blue from the image background */
+            --secondary-color: #1d9e74;     /* Green accent from the bull icon */
+            --accent-color: #34a7e0;        /* Lighter blue accent */
+            --light-bg: #0c4566;            /* Lighter blue-green for content background */
+            --dark-text: #ffffff;           /* White text for better contrast on dark background */
+            --light-text: #f8fafc;          /* Light text color */
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    
+            /* Dark mode variables */
+            --dark-bg: #04263c;             /* Darker blue-green for dark mode */
+            --dark-secondary-bg: #0a324e;   /* Slightly lighter background for cards in dark mode */
+            --dark-secondary-text: #a8c5d6; /* Light blue text for secondary content */
+        }
+        /* Additional changes needed for the new color scheme */
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+        }
+        
+        .card {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+        
+        .card-date {
+            color: var(--dark-secondary-text);
+        }
+        
+        .tab {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+        
+        .search-input {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+        
+        /* Ensure share buttons have proper contrast */
+        .share-buttons {
+            background-color: rgba(10, 50, 78, 0.8);
+        }
+        
+        .share-button {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+        
+        /* מצב לילה */
+        .dark-mode {
+            --light-bg: var(--dark-bg);
+            --dark-text: var(--light-text);
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+        }
+        
+        .dark-mode .card {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+        
+        .dark-mode .card-date {
+            color: var(--dark-secondary-text);
+        }
+        
+        .dark-mode .tab {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+        
+        .dark-mode .card-link {
+            color: var(--secondary-color);
+        }
+        
+        .dark-mode .social-link {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: var(--light-text);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--light-text);
+            margin-bottom: 1rem;
+            object-fit: cover;
+            object-position: top;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #25D366;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .whatsapp-btn i {
+            margin-left: 0.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* חיפוש */
+        .search-container {
+            margin: 1.5rem auto;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            padding-right: 45px;
+            border: none;
+            border-radius: 30px;
+            box-shadow: var(--card-shadow);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            background-color: white;
+            color: var(--dark-text);
+        }
+        
+        .dark-mode .search-input {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+        
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+        }
+        
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+        
+        .search-results {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin-top: 10px;
+            z-index: 100;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .dark-mode .search-results {
+            background-color: var(--dark-secondary-bg);
+        }
+        
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-result-item:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode .search-result-item:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .search-result-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .search-result-category {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+        
+        .dark-mode .search-result-category {
+            color: var(--dark-secondary-text);
+        }
+        
+        .no-results {
+            padding: 15px;
+            text-align: center;
+            color: #6b7280;
+        }
+        
+        .dark-mode .no-results {
+            color: var(--dark-secondary-text);
+        }
+        
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-radius: 30px;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            background-color: white;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+        }
+        
+        .tab i {
+            margin-left: 0.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .tab.active {
+            background-color: var(--accent-color);
+            color: var(--light-text);
+        }
+        
+        .tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-section {
+            display: none;
+            padding: 2rem 0;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* אנימציות להופעת קלפים */
+        .animate-cards .card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .animate-cards .card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
+            position: relative;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-date {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-desc {
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .card-link i {
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .card-link:hover i {
+            transform: translateX(-5px);
+        }
+        /* תוספת: כפתורי שיתוף */
+        .share-buttons {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 5px 10px;
+            display: flex;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .dark-mode .share-buttons {
+            background-color: rgba(30, 41, 59, 0.8);
+        }
+        
+        .card:hover .share-buttons {
+            opacity: 1;
+        }
+        
+        .share-button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 3px;
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+        }
+        
+        .dark-mode .share-button {
+            background-color: var(--dark-secondary-bg);
+            color: var(--light-text);
+        }
+        
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .share-button.facebook {
+            color: #1877f2;
+        }
+        
+        .share-button.twitter {
+            color: #1da1f2;
+        }
+        
+        .share-button.whatsapp {
+            color: #25d366;
+        }
+        
+        .share-button.copy {
+            color: #6b7280;
+        }
+        
+        .dark-mode .share-button.facebook,
+        .dark-mode .share-button.twitter,
+        .dark-mode .share-button.whatsapp {
+            color: var(--light-text);
+        }
+        
+        .dark-mode .share-button.copy {
+            color: var(--dark-secondary-text);
+        }
+        /* מצב יום מותאם (לא מצב לילה) */
+        body:not(.dark-mode) {
+            background-color: #f0f9ff;
+            color: #0f172a;
+        }
+        
+        body:not(.dark-mode) .card {
+            background-color: white;
+            color: #0f172a;
+        }
+        /* תיקון כפתורים לבנים על רקע לבן */
+        body:not(.dark-mode) .tab-container .tab {
+            background-color: #e6f0f9;
+            color: #0d3b56;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        body:not(.dark-mode) .tab-container .tab:hover {
+            background-color: #d0e7f7;
+        }
+        
+        body:not(.dark-mode) .tab-container .tab.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        body:not(.dark-mode) .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+        }
+        /* תיקון לכפתור חזרה למעלה */
+        body:not(.dark-mode) .back-to-top {
+            background-color: var(--accent-color);
+            color: white;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        body:not(.dark-mode) .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        body:not(.dark-mode) .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+        
+        .back-to-top i {
+            font-size: 20px;
+        }
+        /* סטטיסטיקות */
+        .stats-container {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            text-align: center;
+            border-radius: 8px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+        }
+        
+        /* תאריך עדכון אחרון */
+        .last-update {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-top: 1rem;
+        }
+        
+        .dark-mode .last-update {
+            color: var(--dark-secondary-text);
+        }
+        
+        /* מתג מצב לילה */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: white;
+            border-radius: 20px;
+            padding: 5px;
+            display: flex;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 999;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .dark-mode .theme-toggle {
+            background-color: var(--dark-secondary-bg);
+        }
+        
+        .theme-toggle-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .theme-toggle-icon.sun {
+            color: #6b7280;
+        }
+        
+        .theme-toggle-icon.moon {
+            color: #f59e0b;
+        }
+        
+        .dark-mode .theme-toggle-icon.sun {
+            color: #6b7280;
+        }
+        
+        .dark-mode .theme-toggle-icon.moon {
+            color: #f8fafc;
+        }
+        /* Admin Controls */
+        .admin-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            z-index: 999;
+        }
+        
+        .visitor-counter {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+        
+        .visitor-counter i {
+            margin-left: 5px;
+        }
+        
+        #open-admin {
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* Responsive design improvements */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-pic {
+                width: 170px;
+                height: 170px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-container {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                margin-bottom: 0;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            
+            .tab-container::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .tab {
+                flex-shrink: 0;
+                padding: 0.8rem 1.2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 1.75rem;
+            }
+            
+            .stat-label {
+                font-size: 0.9rem;
+            }
+            
+            .search-container {
+                margin: 1rem auto;
+            }
+            
+            .search-input {
+                padding: 10px 45px 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .stat-label {
+                font-size: 0.8rem;
+            }
+            
+            .theme-toggle {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .back-to-top {
+                bottom: 80px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+            }
+        }
+        /* הסתרת כותרת כפולה בעמוד פוסט */
+        .post-header-title, .page-title, h1.post-title {
+          display: none !important;
+        }
+        
+        /* משאיר רק את הכותרת בתוך הכרטיס */
+        .card-title {
+          display: block !important;
+        }
+        /* סגנון לכפתור הצגת תמונה מלאה */
+        .view-post-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .view-post-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* סגנון לחלון התמונה המוגדלת */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .image-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+        }
+        
+        .full-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border: 3px solid white;
+            border-radius: 5px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        /* סגנונות לאזהרת סיכון */
+        .risk-disclaimer-section {
+            padding: 2rem 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #0d3b56;
+            border-top: 3px solid var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            margin: 2rem 0;
+        }
+        
+        .risk-disclaimer-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .risk-disclaimer-section p {
+            font-size: 1rem;
+            line-height: 1.5;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-text);
+            color: var(--primary-color);
+            margin: 0 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body class="animate-cards dark-mode">
+    
     <!-- מתג מצב לילה -->
     <div class="theme-toggle" id="theme-toggle">
         <div class="theme-toggle-icon sun"><i class="fas fa-sun"></i></div>
         <div class="theme-toggle-icon moon"><i class="fas fa-moon"></i></div>
     </div>
+    
     <header>
         <div class="container">
             <div class="header-content">
@@ -758,6 +889,7 @@
             </div>
         </div>
     </header>
+    
     <main class="container">
         <!-- חיפוש -->
         <div class="search-container">
@@ -767,11 +899,12 @@
             </div>
             <div class="search-results" id="search-results"></div>
         </div>
+        
         <!-- תאריך עדכון אחרון -->
         <div class="last-update" id="last-update">
             עודכן לאחרונה: <span id="update-date">4 במרץ, 2025</span>
         </div>
-        <!-- טאב תכנים -->
+        
         <div class="tab-container">
             <div class="tab active" data-target="podcasts">
                 <i class="fas fa-podcast"></i>
@@ -794,38 +927,43 @@
                 פוסטים חשובים
             </div>
         </div>
-        <!-- תכנים -->
+        
         <section id="podcasts" class="content-section active">
             <h2>פודקאסטים</h2>
             <div class="cards-grid" id="podcasts-container">
                 <!-- Cards will be added dynamically via JavaScript -->
             </div>
         </section>
+        
         <section id="articles" class="content-section">
             <h2>כתבות בעיתונים</h2>
             <div class="cards-grid" id="articles-container">
                 <!-- Cards will be added dynamically via JavaScript -->
             </div>
         </section>
+        
         <section id="tv" class="content-section">
             <h2>הופעות בטלוויזיה ורדיו</h2>
             <div class="cards-grid" id="tv-container">
                 <!-- Cards will be added dynamically via JavaScript -->
             </div>
         </section>
+        
         <section id="apps" class="content-section">
             <h2>אפליקציות</h2>
             <div class="cards-grid" id="apps-container">
                 <!-- Cards will be added dynamically via JavaScript -->
             </div>
         </section>
+        
         <section id="posts" class="content-section">
             <h2>פוסטים חשובים</h2>
             <div class="cards-grid" id="posts-container">
                 <!-- Cards will be added dynamically via JavaScript -->
             </div>
         </section>
-        <!-- אזהרת סיכון (בצורת תיבה מעוצבת) -->
+        
+        <!-- בלוק אזהרת סיכון -->
         <section class="risk-disclaimer-section">
             <h2>אזהרת סיכון</h2>
             <p>
@@ -833,6 +971,7 @@
             </p>
         </section>
     </main>
+    
     <footer>
         <div class="container">
             <p>© 2025 @פרופ' גיל - כל הזכויות שמורות</p>
@@ -844,6 +983,7 @@
             </div>
         </div>
     </footer>
+    
     <!-- חלון סיסמה -->
     <div id="password-modal">
         <div class="password-container">
@@ -856,10 +996,12 @@
             </div>
         </div>
     </div>
+    
     <!-- פאנל מנהל (מוסתר כברירת מחדל) -->
     <div id="admin-panel" style="display: none; position: fixed; bottom: 20px; left: 20px; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.1); z-index: 1000; max-width: 90%; max-height: 80%; overflow-y: auto;">
         <h3>פאנל ניהול תוכן</h3>
         <button id="close-admin" style="position: absolute; top: 10px; right: 10px; background: none; border: none; cursor: pointer;">×</button>
+        
         <div style="margin-top: 10px;">
             <label for="content-type">בחר קטגוריה:</label>
             <select id="content-type">
@@ -870,26 +1012,34 @@
                 <option value="posts">פוסטים חשובים</option>
             </select>
         </div>
+        
         <div style="margin-top: 15px;">
             <label for="title-input">כותרת:</label>
             <input type="text" id="title-input" style="width: 100%; padding: 8px; margin-top: 5px;">
         </div>
+        
         <div style="margin-top: 10px;">
             <label for="date-input">תאריך:</label>
             <input type="text" id="date-input" style="width: 100%; padding: 8px; margin-top: 5px;" placeholder="לדוגמה: 1 במרץ, 2025">
         </div>
+        
         <div style="margin-top: 10px;">
             <label for="desc-input">תיאור:</label>
             <textarea id="desc-input" style="width: 100%; padding: 8px; margin-top: 5px; height: 80px;"></textarea>
         </div>
+        
         <div style="margin-top: 10px;">
             <label for="link-input">קישור:</label>
             <input type="text" id="link-input" style="width: 100%; padding: 8px; margin-top: 5px;" placeholder="https://">
         </div>
+        
         <button id="add-content-btn" style="margin-top: 15px; padding: 8px 15px; background-color: var(--accent-color); color: white; border: none; border-radius: 4px; cursor: pointer;">הוסף תוכן</button>
+        
         <div id="result-message" style="margin-top: 10px; padding: 8px; display: none;"></div>
+        
         <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;">
             <p style="font-size: 14px; color: #b91c1c; font-weight: bold;">⚠️ שים לב: תוכן שתוסיף כאן יעלם אם תרענן את הדף!</p>
+            
             <div style="margin-top: 10px; background-color: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
                 <h4 style="color: var(--primary-color); margin-bottom: 10px;">הוראות לשמירה קבועה:</h4>
                 <ol style="padding-right: 20px;">
@@ -906,16 +1056,21 @@
             </div>
         </div>
     </div>
-    <!-- Admin Controls (Button only) -->
+    
+   <!-- Admin Controls (Button only) -->
     <div class="admin-controls">
         <button id="open-admin">
             <i class="fas fa-plus"></i>
         </button>
     </div>
+    
     <script>
         // Configuration - Edit this to add your content
         const contentData = {
+            // WhatsApp group link
             whatsappLink: "https://chat.whatsapp.com/Eiji0CIWupSLZBPjXQf8MI",
+            
+            // Podcasts
             podcasts: [
                 {
                     title: "מהפכת הדור הבא באיי-איי",
@@ -923,7 +1078,7 @@
                     description: "השקעות להייטקיסטים עם צח איציק",
                     image: "images/השקעות להיטקיסטים.jpg",
                     link: "https://youtu.be/aaE3vLHKizs?si=VB5wusTtazEyaB-1"
-                },
+                },                
                 {
                     title: "שבע עובדות שלא ידעתם על הכלכלה הישראלית",
                     date: "4.2.2025",
@@ -937,14 +1092,14 @@
                     description: "אצל ספקט ורבינוביץ",
                     image: "images/השפעת ai.jpg", 
                     link: "https://open.spotify.com/episode/0xnVvAlrPgC720XNj8Syhj?si=db5a3932670d40f5"
-                },
+                }, 
                 {
                     title: "כלכלת ישראל – מקורונה למלחמה",
                     date: "14.01.24",
                     description: "אצל עומר רבינוביץ",
                     image: "images/כלכלת ישראל.jpg",
                     link: "https://investor360.club/webinar140124/"
-                },
+                },               
                 {
                     title: "הדברים שלא ידעתם על הכלכלה הישראלית ולאן ממשיכים מכאן",
                     date: "31.1.2023",
@@ -953,6 +1108,8 @@
                     link: "https://www.youtube.com/watch?v=drrHTB35OxE&ab_channel=Investor360"
                 }
             ],
+            
+            // Newspaper Articles 
             articles: [
                 {
                     title: "דיון הטמעת הבינה המלאכותית בשירות המדינה",
@@ -966,7 +1123,7 @@
                     date: "28.3.2025",
                     description: "ראיון Chiportal",
                     image: "images/Chip.jpg",
-                    link: "https://chiportal.co.il/%d7%9c%d7%a7%d7%a8%d7%90%d7%aa-%d7%9e%d7%a4%d7%92%d7%a9-%d7%94%d7%a1%d7%99%d7%9c%d7%99%d7%a7%d7%95%d7%9f-%d7%a7%d7%9c%d7%90%d7%91-%d7%94%d7%91%d7%99%d7%a0%d7%94-%d7%94%d7%9e%d7%9c%d7%90%d7%9b%d7%95/"
+                    link: "https://chiportal.co.il/%d7%9c%d7%a7%d7%a8%d7%90%d7%aa-%d7%9e%d7%a4%d7%92%d7%a9-%d7%94%d7%a1%d7%99%d7%9c%d7%99%d7%a7%d7%95%d7%9f-%d7%a7%d7%9c%d7%90%d7%91-%d7%91%d7%99%d7%a0%d7%94-%d7%94%d7%9e%d7%9c%d7%90%d7%9b%d7%95/"
                 },
                 {
                     title: "מהפכה בזמן אמת: ה־ AI מעצבת מחדש את חיינו",
@@ -1088,6 +1245,8 @@
                     link: "https://www.bizportal.co.il/marketopionion/news/article/785478"
                 }
             ],
+            
+            // TV Appearances
             tv: [
                 {
                     title: "ערוץ הכלכלה:  בינה מלאכותית בשוק העבודה",
@@ -1125,6 +1284,8 @@
                     link: "https://102fm.co.il/indi/143112"
                 }
             ],
+            
+            // Applications
             apps: [
                 {
                     title: "המסלול שלך למיליון",
@@ -1137,6 +1298,8 @@
                     link: "https://gilepstein.github.io/How-to-be-a-Millionaire/"
                 }
             ],
+            
+            // Important Posts
             posts: [
                 {
                     title: "S&P 500: מדריך הישרדות למפולות",
@@ -1154,32 +1317,47 @@
                 }
             ]
         };
+        
+        // עדכון תאריך עדכון אחרון - מעדכן אוטומטית לתאריך היום
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             const formattedDate = today.toLocaleDateString('he-IL', options);
             document.getElementById('update-date').textContent = formattedDate;
         });
+        
+        // Set WhatsApp group link
         document.getElementById('whatsapp-group').href = contentData.whatsappLink;
+        
+        // מצב לילה (Dark Mode)
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
+        
+        // בדיקה אם יש העדפה שמורה במערכת
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light') {
             body.classList.remove('dark-mode');
         } else {
+            // ברירת המחדל היא מצב לילה
             localStorage.setItem('theme', 'dark');
         }
         themeToggle.addEventListener('click', function() {
             body.classList.toggle('dark-mode');
+            
+            // שמירת ההעדפה
             if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
             } else {
                 localStorage.setItem('theme', 'light');
             }
         });
+        
+        // כפתור חזרה למעלה
         document.addEventListener('DOMContentLoaded', function() {
             const backToTopButton = document.getElementById('back-to-top');
+            
             if (backToTopButton) {
+                // Show/hide the button based on scroll position
                 window.addEventListener('scroll', function() {
                     if (window.scrollY > 300) {
                         backToTopButton.classList.add('visible');
@@ -1187,12 +1365,16 @@
                         backToTopButton.classList.remove('visible');
                     }
                 });
+                
+                // Scroll to top when the button is clicked
                 backToTopButton.addEventListener('click', function() {
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
                     });
                 });
+                
+                // בדיקת מיקום הגלילה בטעינת הדף
                 if (window.scrollY > 300) {
                     backToTopButton.classList.add('visible');
                 }
@@ -1200,25 +1382,41 @@
                 console.error('לא נמצא כפתור חזרה למעלה!');
             }
         });
+        
+        // אנימציית הופעת הקלפים
         function checkCardVisibility() {
             const cards = document.querySelectorAll('.card');
+            
             cards.forEach(card => {
                 const cardTop = card.getBoundingClientRect().top;
                 const cardBottom = card.getBoundingClientRect().bottom;
+                
+                // אם הקלף נראה בחלון
                 if (cardTop < window.innerHeight && cardBottom > 0) {
                     card.classList.add('show');
                 }
             });
         }
+        
         window.addEventListener('scroll', checkCardVisibility);
         window.addEventListener('resize', checkCardVisibility);
+        
+        // הפעלה ראשונית של בדיקת נראות הקלפים
         setTimeout(checkCardVisibility, 100);
+        
+        // Function to create a card element with share buttons
         function createCard(item, type) {
+            // Create unique ID for the card based on title
             const cardId = `card-${type}-${item.title.replace(/\s+/g, '-').toLowerCase()}`;
+            
+            // בדיקה האם מדובר בפוסט (שצריך להציג תמונה במקום קישור)
             const isPost = type === 'posts';
+            
+            // תוכן הקישור - שונה בין פוסטים לתוכן אחר
             const linkContent = isPost ? 
                 `<div class="view-post-btn">הצג פוסט</div>` : 
                 `<i class="fas fa-arrow-left"></i> קרא עוד`;
+            
             return `
                 <div class="card" id="${cardId}">
                     <img src="${item.image}" alt="${item.title}" class="card-img">
@@ -1250,44 +1448,60 @@
                 </div>
             `;
         }
+        
+        // פונקציות שיתוף
         function shareOnFacebook(cardId, link) {
             const card = document.getElementById(cardId);
             const title = card.querySelector('.card-title').textContent;
             const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}&quote=${encodeURIComponent(title)}`;
             window.open(shareUrl, '_blank');
         }
+        
         function shareOnTwitter(cardId, link) {
             const card = document.getElementById(cardId);
             const title = card.querySelector('.card-title').textContent;
             const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(link)}`;
             window.open(shareUrl, '_blank');
         }
+        
         function shareOnWhatsApp(cardId, link) {
             const card = document.getElementById(cardId);
             const title = card.querySelector('.card-title').textContent;
             const shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${title} - ${link}`)}`;
             window.open(shareUrl, '_blank');
         }
+        
         function copyLink(cardId, link) {
             navigator.clipboard.writeText(link).then(() => {
+                // הודעה זמנית על העתקה מוצלחת
                 const card = document.getElementById(cardId);
                 const copyButton = card.querySelector('.share-button.copy');
                 const originalIcon = copyButton.innerHTML;
+                
                 copyButton.innerHTML = '<i class="fas fa-check"></i>';
+                
                 setTimeout(() => {
                     copyButton.innerHTML = originalIcon;
                 }, 2000);
             });
         }
+        
+        // פונקציית חיפוש
         const searchInput = document.getElementById('search-input');
         const searchResults = document.getElementById('search-results');
+        
         searchInput.addEventListener('input', function() {
             const query = this.value.trim().toLowerCase();
+            
             if (query.length < 2) {
                 searchResults.style.display = 'none';
                 return;
             }
+            
+            // איסוף כל התוצאות
             let results = [];
+            
+            // חיפוש בפודקאסטים
             contentData.podcasts.forEach(item => {
                 if (item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)) {
@@ -1300,6 +1514,8 @@
                     });
                 }
             });
+            
+            // חיפוש בכתבות
             contentData.articles.forEach(item => {
                 if (item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)) {
@@ -1312,6 +1528,8 @@
                     });
                 }
             });
+            
+            // חיפוש בהופעות טלוויזיה ורדיו
             contentData.tv.forEach(item => {
                 if (item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)) {
@@ -1324,6 +1542,8 @@
                     });
                 }
             });
+            
+            // חיפוש באפליקציות
             contentData.apps.forEach(item => {
                 if (item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)) {
@@ -1336,6 +1556,8 @@
                     });
                 }
             });
+            
+            // חיפוש בפוסטים
             contentData.posts.forEach(item => {
                 if (item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)) {
@@ -1348,8 +1570,10 @@
                     });
                 }
             });
+            // הצגת התוצאות
             if (results.length > 0) {
                 let html = '';
+                
                 results.forEach(result => {
                     const typeNames = {
                         podcasts: 'פודקאסט',
@@ -1358,6 +1582,7 @@
                         apps: 'אפליקציה',
                         posts: 'פוסט'
                     };
+                    
                     html += `
                         <div class="search-result-item" data-link="${result.link}" data-type="${result.type}">
                             <div class="search-result-title">${result.title}</div>
@@ -1366,60 +1591,90 @@
                         </div>
                     `;
                 });
+                
                 searchResults.innerHTML = html;
                 searchResults.style.display = 'block';
+                
+                // הוספת מאזינים לאירועי לחיצה
                 const resultItems = document.querySelectorAll('.search-result-item');
                 resultItems.forEach(item => {
                     item.addEventListener('click', function() {
                         const link = this.getAttribute('data-link');
                         const type = this.getAttribute('data-type');
+                        
+                        // אם יש לינק, עבור אליו
                         if (link && link !== '#') {
                             window.open(link, '_blank');
                         }
+                        
+                        // סמן את הטאב המתאים ועבור לקטגוריה
                         const tabs = document.querySelectorAll('.tab');
                         tabs.forEach(tab => {
                             if (tab.getAttribute('data-target') === type) {
                                 tab.click();
+                                
+                                // סגירת תוצאות החיפוש
                                 searchResults.style.display = 'none';
                                 searchInput.value = '';
                             }
                         });
                     });
                 });
+                
             } else {
                 searchResults.innerHTML = '<div class="no-results">לא נמצאו תוצאות</div>';
                 searchResults.style.display = 'block';
             }
         });
+        
+        // סגירת תוצאות החיפוש בלחיצה מחוץ לתיבת החיפוש
         document.addEventListener('click', function(event) {
             if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
                 searchResults.style.display = 'none';
             }
         });
+        
+        // Function to populate a container with cards
         function populateContainer(containerId, items, type) {
             const container = document.getElementById(containerId);
             container.innerHTML = items.map(item => createCard(item, type)).join('');
         }
+        
+        // Populate all containers
         populateContainer('podcasts-container', contentData.podcasts, 'podcasts');
         populateContainer('articles-container', contentData.articles, 'articles');
         populateContainer('tv-container', contentData.tv, 'tv');
         populateContainer('apps-container', contentData.apps, 'apps');
         populateContainer('posts-container', contentData.posts, 'posts');
+        
+        // עדכון הספירות בסטטיסטיקות
         document.getElementById('podcast-count').textContent = contentData.podcasts.length + '+';
         document.getElementById('article-count').textContent = contentData.articles.length;
         document.getElementById('tv-count').textContent = contentData.tv.length;
+        
+        // Tab switching functionality
         const tabs = document.querySelectorAll('.tab');
         const contentSections = document.querySelectorAll('.content-section');
+        
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
+                // Remove active class from all tabs and content sections
                 tabs.forEach(t => t.classList.remove('active'));
                 contentSections.forEach(cs => cs.classList.remove('active'));
+                
+                // Add active class to clicked tab
                 tab.classList.add('active');
+                
+                // Show corresponding content section
                 const targetId = tab.getAttribute('data-target');
                 document.getElementById(targetId).classList.add('active');
+        
+                // בדיקה מחדש של נראות הקלפים לאחר החלפת הטאב
                 setTimeout(checkCardVisibility, 100);
             });
         });
+        
+        // קוד לסיסמה ולפאנל המנהל
         const openAdminBtn = document.getElementById('open-admin');
         const closeAdminBtn = document.getElementById('close-admin');
         const adminPanel = document.getElementById('admin-panel');
@@ -1430,20 +1685,27 @@
         const submitPasswordBtn = document.getElementById('submit-password');
         const cancelPasswordBtn = document.getElementById('cancel-password');
         const passwordError = document.getElementById('password-error');
+        
+        // פתיחת חלון הסיסמה
         openAdminBtn.addEventListener('click', () => {
             passwordModal.style.display = 'flex';
             adminPassword.value = '';
             passwordError.style.display = 'none';
         });
+        
+        // ביטול הזנת סיסמה
         cancelPasswordBtn.addEventListener('click', () => {
             passwordModal.style.display = 'none';
         });
+        
+        // בדיקת סיסמה
         submitPasswordBtn.addEventListener('click', checkPassword);
         adminPassword.addEventListener('keyup', (e) => {
             if (e.key === 'Enter') {
                 checkPassword();
             }
         });
+        
         function checkPassword() {
             const password = adminPassword.value;
             if (password === '123456') {
@@ -1456,29 +1718,42 @@
                 adminPassword.focus();
             }
         }
+        
+        // סגירת פאנל המנהל
         closeAdminBtn.addEventListener('click', () => {
             adminPanel.style.display = 'none';
             document.querySelector('.admin-controls').style.display = 'flex';
         });
+        
+        // פונקציה להוספת תוכן חדש
         addContentBtn.addEventListener('click', () => {
             const contentType = document.getElementById('content-type').value;
             const title = document.getElementById('title-input').value.trim();
             const date = document.getElementById('date-input').value.trim();
             const description = document.getElementById('desc-input').value.trim();
             const link = document.getElementById('link-input').value.trim();
+            
             if (!title || !date || !description) {
                 showResult('נא למלא את כל השדות החובה', 'error');
                 return;
             }
+            
+            // יצירת אובייקט חדש
             const newItem = {
                 title: title,
                 date: date,
                 description: description,
-                image: "/api/placeholder/300/180",
+                image: "/api/placeholder/300/180", // תמונת ברירת מחדל
                 link: link || "#"
             };
-            contentData[contentType].unshift(newItem);
+            
+            // הוספת הפריט למערך המתאים
+            contentData[contentType].unshift(newItem); // הוספה בתחילת המערך
+            
+            // עדכון התצוגה
             populateContainer(`${contentType}-container`, contentData[contentType], contentType);
+            
+            // עדכון הספירות בסטטיסטיקות
             if (contentType === 'podcasts') {
                 document.getElementById('podcast-count').textContent = contentData.podcasts.length + '+';
             } else if (contentType === 'articles') {
@@ -1486,7 +1761,11 @@
             } else if (contentType === 'tv') {
                 document.getElementById('tv-count').textContent = contentData.tv.length;
             }
+            
+            // בדיקה מחדש של נראות הקלפים לאחר הוספת תוכן חדש
             setTimeout(checkCardVisibility, 100);
+            
+            // הצגת קוד לשמירה
             const codeToSave = `{
     title: "${title}",
     date: "${date}",
@@ -1494,6 +1773,7 @@
     image: "/api/placeholder/300/180",
     link: "${link || '#'}"
 },`;
+            
             showResult(`
 <strong>התוכן נוסף בהצלחה!</strong><br><br>
 <strong>כדי שהתוכן יישמר באופן קבוע, בצע את הפעולות הבאות:</strong><br>
@@ -1503,15 +1783,19 @@
 3. פתח את קובץ index.html<br>
 4. לחץ על כפתור העריכה (סמל עיפרון)<br>
 5. חפש את המקום המתאים בקוד (${contentType}: [)<br>
-6. הדבק את הקוד בדיוק אחרי הסוגר המרובע [<br>
+6. הדבק את הקוד בדיוק אחרי הסוגר המרובע הפותח [<br>
 7. לחץ על Commit changes בתחתית העמוד<br><br>
 <span style="color:#166534; font-weight:bold;">⚠️ שים לב: ללא ביצוע הפעולות הללו, התוכן יעלם ברענון הדף!</span>
 `, 'success');
+            
+            // ניקוי הטופס
             document.getElementById('title-input').value = '';
             document.getElementById('date-input').value = '';
             document.getElementById('desc-input').value = '';
             document.getElementById('link-input').value = '';
         });
+        
+        // פונקציה להצגת הודעות
         function showResult(message, type) {
             resultMessage.innerHTML = message;
             resultMessage.style.display = 'block';
@@ -1522,16 +1806,24 @@
         }
     </script>
     <script>
+        // קוד ליצירת כפתור חזרה למעלה באופן דינמי
         document.addEventListener('DOMContentLoaded', function() {
+            // הסר כפתור קיים אם יש
             const existingButton = document.getElementById('back-to-top');
             if (existingButton) {
                 existingButton.remove();
             }
+            
+            // צור כפתור חדש
             const newButton = document.createElement('div');
             newButton.className = 'back-to-top';
             newButton.id = 'back-to-top';
             newButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+            
+            // הוסף את הכפתור לתחילת ה-body
             document.body.prepend(newButton);
+            
+            // הוסף מאזיני אירועים
             newButton.addEventListener('click', function() {
                 window.scrollTo({
                     top: 0,
